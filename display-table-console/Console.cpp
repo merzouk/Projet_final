@@ -13,14 +13,8 @@ namespace Manage
 
        void Console::load_all_datas()
        {
-
-                 //ajouter appel boost choix = 1
-                 //quand le retour est ok, on parse et affiche le fichier retourne datas.json
-              string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:1}}\n" );
-              vector<string> str_json  = split (datas, "#");
-             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
-             this->display->print_list_data(vect_datas);
-             //cout << datas << endl;
+             string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:1}}\n" );
+             this->display->print_list_data(convert_list_json_object(split(datas, "#")));
        }
 
         void Console::load_data_by_id()
@@ -33,13 +27,8 @@ namespace Manage
                     cin.clear();
                     cin>>id;
              }while(this->utils->validate_id(id) != 0);
-            //ajouter appel boost choix = 2, id = ?
-            //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:2, id:"+to_string(id)+"}}\n" );
-             vector<string> str_json  = split (datas, "#");
-             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
-             this->display->print_list_data(vect_datas);
-             //cout << datas << endl;
+            this->display->print_list_data(convert_list_json_object(split(datas, "#")));
         }
 
         void Console::load_data_by_capteur_name()
@@ -52,14 +41,8 @@ namespace Manage
                     cin.ignore();
                     getline(cin, capteur_id);
              }while(this->utils->validate_string(capteur_id) != 0);
-             //ajouter appel boost choix = 3, capteur_id = ""
-             //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:3, sensor_id:\""+capteur_id+"\"}}\n" );
-             vector<string> str_json  = split (datas, "#");
-             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
-             this->display->print_list_data(vect_datas);
-             //cout << datas << endl;
-
+             this->display->print_list_data(convert_list_json_object(split(datas, "#")));
         }
 
        void Console::load_data_by_date()
@@ -87,13 +70,8 @@ namespace Manage
                     cin.clear();
                     cin>>year;
              }while(this->utils->validate_year(year) != 0);
-            //ajouter appel boost choix = 4, day = ? month = ? year = ?
-            //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address,"{datas:{choix:4, day:"+to_string(day)+", month:"+to_string(month)+", year:"+to_string(year)+"}}\n" );
-             vector<string> str_json  = split (datas, "#");
-             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
-             this->display->print_list_data(vect_datas);
-             //cout << datas << endl;
+             this->display->print_list_data(convert_list_json_object(split(datas, "#")));
        }
 
        void Console::load_data_by_hour()
@@ -114,13 +92,8 @@ namespace Manage
                     cin.clear();
                     cin>>minute;
              }while(this->utils->validate_minute(minute) != 0);
-             //ajouter appel boost choix = 5, hour = ? minute = ?
-             //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address,"{datas:{choix:5, minute:"+to_string(minute) +", hour:"+to_string(hour)+"}}\n" );
-             vector<string> str_json  = split (datas, "#");
-             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
-             this->display->print_list_data(vect_datas);
-             //cout << datas << endl;
+             this->display->print_list_data(convert_list_json_object(split(datas, "#")));
        }
 
        vector<DatasCapteur *> Console::convert_list_json_object (vector<string> json_string)

@@ -14,11 +14,11 @@ namespace Manage
 
                 if( !error )
                 {
-                  cout << "Client sent response!" << endl;
+                  //cout << "Client sent request!" << endl;
                 }
                 else
                 {
-                  cout << "send failed: " << error.message() << endl;
+                  cout << "send request failed: " << error.message() << endl;
                 }
 
                 boost::asio::streambuf receive_buffer;
