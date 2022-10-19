@@ -32,85 +32,21 @@ void send_(tcp::socket &socket, const string &message) {
         boost::asio::write(socket, boost::asio::buffer(message));
 }
 
-std::string traitement_chargement_donnees(int choix, int id,
-                string capteur_name, int minute, int hour, int day, int month,
-                int year) {
-        Factory *factory = new Factory();
-        vector<DatasCapteur*> vect_datas;
-        vect_datas.clear();
-        if(choix == 1)
-        {
-                vect_datas = factory->load_all_datas();
-        }
-        else if (choix == 2)
-        {
-                vect_datas = factory->load_data_by_id(id);
-        }
-        else if(choix == 3)
-        {
-                vect_datas = factory->load_data_by_capteur_name(capteur_name);
-        }
-        else if(choix == 4)
-        {
-                vect_datas = factory->load_data_by_date(day, month, year);
-        }
-        else if(choix == 5)
-        {
-                vect_datas = factory->load_data_by_hour(minute, hour);
-        }
-        std::vector < std::string > json_string_vect =
-                        factory->convert_object_to_json_string(vect_datas);
-        delete factory;
-        factory = nullptr;
-        std::string json_string = "";
-        if (json_string_vect.size() == 0)
-                return json_string;
-        for (std::string str : json_string_vect)
-       {
-                json_string += str + "\n";
-        }
-        return json_string;
-}
-
-std::string parser_message_request(std::string msg_request)
-{
-
-        RSJresource  resource (msg_request); // RSJ parser (delayed parser)
-        int choix = resource["datas"]["choix"].as<int>(0);
-        string json_response = "";
-        if (choix == 1) {
-
-                json_response = traitement_chargement_donnees(choix, 0, "", 0, 0, 0, 0, 0);
-        } else if (choix == 2) {
-                int id = resource["datas"]["id"].as<int>(0);
-                json_response = traitement_chargement_donnees(choix, id, "", 0, 0, 0, 0, 0);
-        } else if (choix == 3) {
-                string id_capteur = resource["datas"]["sensor_id"].as<std::string>("uknows_sensor");
-                json_response = traitement_chargement_donnees(choix, 0, id_capteur, 0, 0,
-                                0, 0, 0);
-        } else if (choix == 4) {
-
-                int day = resource["datas"]["day"].as<int>(0);
-                int month = resource["datas"]["month"].as<int>(0);
-                int year = resource["datas"]["year"].as<int>(0);
-
-                json_response = traitement_chargement_donnees(choix, 0, "", 0, 0, day,
-                                month, year);
-        } else if (choix == 5) {
-                int minute = resource["datas"]["minute"].as<int>(0);
-                int hour   = resource["datas"]["hour"].as<int>(0);
-                json_response = traitement_chargement_donnees(choix, 0, "", minute, hour, 0,
-                                0, 0);
-        }
-        return json_response;
-}
 
 int main(int argc, char ** argv)
 {
 
        int port =  atoi(argv[1]);
-        boost::asio::io_service io_service;
-        while (1)
+       if(port == 0)
+       {
+              cout << "Le numero de port n'est pas renseigne, connexion impossible : " << port << endl;
+              return 1;
+       }
+       if(port < 0) port *=-1;
+       boost::asio::io_service io_service;
+       Factory *factory = new Factory();
+
+       while (1)
        {
                 tcp::acceptor acceptor_(io_service, tcp::endpoint(tcp::v4(), port));
 
@@ -121,7 +57,7 @@ int main(int argc, char ** argv)
                 string message_request = read_(socket_);
 
                 cout <<"message request : " << message_request << endl;
-                string message_response = parser_message_request(message_request);
+                string message_response = factory->load_message_response(message_request);
 
                 cout << "message response : " << endl << message_response << endl;
 
@@ -129,6 +65,8 @@ int main(int argc, char ** argv)
 
                 cout << "Server TCP : sent response to client successfully !" << endl;
         }
+        delete factory;
+        factory = nullptr;
         return 0;
 }
 

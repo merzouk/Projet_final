@@ -1,4 +1,5 @@
 #include "Console.hpp"
+#include "JsonTools.hpp"
 
 
 namespace Manage
@@ -16,7 +17,10 @@ namespace Manage
                  //ajouter appel boost choix = 1
                  //quand le retour est ok, on parse et affiche le fichier retourne datas.json
               string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:1}}\n" );
-              cout << datas << endl;
+              vector<string> str_json  = split (datas, "#");
+             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
+             this->display->print_list_data(vect_datas);
+             //cout << datas << endl;
        }
 
         void Console::load_data_by_id()
@@ -32,8 +36,10 @@ namespace Manage
             //ajouter appel boost choix = 2, id = ?
             //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:2, id:"+to_string(id)+"}}\n" );
-             cout << datas << endl;
-
+             vector<string> str_json  = split (datas, "#");
+             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
+             this->display->print_list_data(vect_datas);
+             //cout << datas << endl;
         }
 
         void Console::load_data_by_capteur_name()
@@ -49,7 +55,10 @@ namespace Manage
              //ajouter appel boost choix = 3, capteur_id = ""
              //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address, "{datas:{choix:3, sensor_id:\""+capteur_id+"\"}}\n" );
-             cout << datas << endl;
+             vector<string> str_json  = split (datas, "#");
+             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
+             this->display->print_list_data(vect_datas);
+             //cout << datas << endl;
 
         }
 
@@ -80,8 +89,11 @@ namespace Manage
              }while(this->utils->validate_year(year) != 0);
             //ajouter appel boost choix = 4, day = ? month = ? year = ?
             //quand le retour est ok, on parse et affiche le fichier retourne datas.json
-           string datas =  this->boostTools->load_datas(this->port, this->ip_address,"{datas:{choix:4, day:"+to_string(day)+", month:"+to_string(month)+", year:"+to_string(year)+"}}\n" );
-             cout << datas << endl;
+             string datas =  this->boostTools->load_datas(this->port, this->ip_address,"{datas:{choix:4, day:"+to_string(day)+", month:"+to_string(month)+", year:"+to_string(year)+"}}\n" );
+             vector<string> str_json  = split (datas, "#");
+             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
+             this->display->print_list_data(vect_datas);
+             //cout << datas << endl;
        }
 
        void Console::load_data_by_hour()
@@ -105,7 +117,38 @@ namespace Manage
              //ajouter appel boost choix = 5, hour = ? minute = ?
              //quand le retour est ok, on parse et affiche le fichier retourne datas.json
              string datas =  this->boostTools->load_datas(this->port, this->ip_address,"{datas:{choix:5, minute:"+to_string(minute) +", hour:"+to_string(hour)+"}}\n" );
-             cout << datas << endl;
+             vector<string> str_json  = split (datas, "#");
+             vector<DatasCapteur *> vect_datas = convert_list_json_object(str_json);
+             this->display->print_list_data(vect_datas);
+             //cout << datas << endl;
+       }
+
+       vector<DatasCapteur *> Console::convert_list_json_object (vector<string> json_string)
+       {
+              vector<DatasCapteur *> datas;
+              if(json_string.size() == 0) return datas;
+              for(string str_json : json_string)
+              {
+                    DatasCapteur * data = this->jsonTools->build_object_from_json(str_json);
+                    if(data->get_identite_capt() == "unknown_id_capteur" || data->get_id() == -1) continue;
+                    datas.push_back(data);
+              }
+              return datas;
+       }
+
+       vector<string> Console::split (string s, string delimiter) {
+           size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+           string token;
+           vector<string> res;
+
+           while ((pos_end = s.find (delimiter, pos_start)) != string::npos) {
+               token = s.substr (pos_start, pos_end - pos_start);
+               pos_start = pos_end + delim_len;
+               res.push_back (token);
+           }
+
+           res.push_back (s.substr (pos_start));
+           return res;
        }
 
 }

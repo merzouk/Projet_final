@@ -32,6 +32,7 @@ namespace Manage
                      ~JsonTools(){}
                      DatasCapteur * build_object_from_json(string json_string);
                      void print_list_data(DatasCapteur * data);
+                     void print_list_data(vector<DatasCapteur *> datas);
                      std::string read_json_file_contains(string path_to_file);
                      int build_Object_from_json_save(string path_to_file, const char * path_data_base);
        };
