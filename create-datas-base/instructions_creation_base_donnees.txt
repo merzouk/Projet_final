@@ -1,0 +1,17 @@
+sudo apt update
+
+sudo apt upgrade
+
+sudo apt install sqlite3
+
+sudo apt update
+
+sudo apt upgrade
+
+sudo mkdir /usr/local/db
+
+sudo chmod 777 -R /usr/local/db
+
+chmod +x run_create.sh
+
+./run_create.sh
