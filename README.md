@@ -3,8 +3,7 @@ Projet CPP pour la formation C/CPP embarqué
 
 
 
-Il s'agit de créer un annuaire dans lequel seront stockés des contacts.
-Le projet sera décomposé en plusieurs parties.
+
 
 ```
 - PARTIE 1 : GESTION DES CONTACTS
@@ -29,10 +28,7 @@ Le projet sera décomposé en plusieurs parties.
 - Adresse de l'entreprise
 - Adresse Mail (Chaîne contenant un @)
 ```
-Toute adresse est composée du Numéro, Rue, Complément, Code Postal et Ville. On considérera 
-que l'ensemble des Contacts sont Français. Créer dans un premier temps une application console 
-vous permettant de tester la hiérarchie mise en place. Vous joindrez le diagramme de classes 
-associé à votre hiérarchie.
+Toute adresse 
 ```
 
 # PARTIE 2 : CREATION DE L'INTERFACE CONSOLE
