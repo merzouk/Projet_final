@@ -41,7 +41,6 @@ namespace DataAccess
                      case 7 :
                             data->set_gyro_z(atof(argv[i]));
                             break;
-
                      case 8 :
                             data->set_accel_x(atof(argv[i]));
                             break;
@@ -51,7 +50,6 @@ namespace DataAccess
                      case 10 :
                             data->set_accel_z(atof(argv[i]));
                             break;
-
                      case 11 :
                             data->set_seconde(atoi(argv[i]));
                             break;
