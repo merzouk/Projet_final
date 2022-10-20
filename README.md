@@ -2,11 +2,13 @@
 Projet CPP pour la formation C/CPP embarqué
 
 ```
-Le but de ce projet est de constituer un système de génération de logs. Ces logs seront destinés à être utilisés par des DataScientists.
+Le but de ce projet est de constituer un système de génération de logs. 
+Ces logs seront destinés à être utilisés par des DataScientists.
 ```
 
 ```
-Afin de mieux présenter les éléments, on commencera par définir les composantes de l'architecture globale. Ensuite, on présentera les différents composants utilisés. Pour finir, on présentera les livrables à fournir lors de la soutenance.
+Afin de mieux présenter les éléments, on commencera par définir les composantes de l'architecture globale. 
+Ensuite, on présentera les différents composants utilisés. Pour finir, on présentera les livrables à fournir lors de la soutenance.
 ```
 ## Le système de collecte des données est découpé en plusieurs parties :
 
@@ -14,11 +16,15 @@ Afin de mieux présenter les éléments, on commencera par définir les composan
 Dans un premier temps, on distingue 2 Raspberry interconnectés en utilisant le protocole TX/RX.
 ```
 ```
- D'un côté, l'un des Raspberry qu'on appellera "Balise" doté de différents capteurs se charge de collecter régulièrement les informations fournies par les capteurs. De l'autre côté, le second Raspberry qu'on appellera "Maître" via le protocole TX/RX récupère ces données. Il va de soi qu'en cas de redémarrage de la "Balise", le programme de collecte des informations devra se relancer automatiquement. 
+ D'un côté, l'un des Raspberry qu'on appellera "Balise" doté de différents capteurs se charge de collecter 
+ régulièrement les informations fournies par les capteurs. De l'autre côté, le second Raspberry qu'on appellera "Maître" via le protocole TX/RX récupère ces données. 
+ 
+ Il va de soi qu'en cas de redémarrage de la "Balise", le programme de collecte des informations devra se relancer automatiquement. 
 ```
 
 ```
- Concernant le "Maître", l'intervalle de collecte doit rester paramétrable. A ces données issues des capteurs, on y ajoutera les caractéristiques liées à la balise elle-même. 
+ Concernant le "Maître", l'intervalle de collecte doit rester paramétrable. A ces données issues des capteurs, 
+ on y ajoutera les caractéristiques liées à la balise elle-même. 
 ```
 
 
@@ -28,7 +34,9 @@ Une fois ces données récupérées par le "Maître", celles-ci doivent être fo
 
 
 ```
- Ce serveur TCP centralisera les différentes données transmises par le "Maître" à intervalle régulier afin de permettre d'établir des statistiques exploitables par les dataScientists. Par ailleurs, le Maître sera doté d'un feu tricolore (Red/Yellow/Green). Chaque couleur de ce feu tricolore aura une correspondance :
+ Ce serveur TCP centralisera les différentes données transmises par le "Maître" à intervalle régulier afin 
+ de permettre d'établir des statistiques exploitables par les dataScientists. Par ailleurs, le Maître 
+ sera doté d'un feu tricolore (Red/Yellow/Green). Chaque couleur de ce feu tricolore aura une correspondance :
 ```
 
 
@@ -40,7 +48,8 @@ Une fois ces données récupérées par le "Maître", celles-ci doivent être fo
 
 
 ```
-De plus, en vue de faciliter l'exploitation des données par les Datascientists, vous constituerez une application console exposant les différentes informations issues du serveur TCP.
+De plus, en vue de faciliter l'exploitation des données par les Datascientists, vous constituerez une application console 
+exposant les différentes informations issues du serveur TCP.
 ```
 
 
@@ -55,7 +64,8 @@ oou d'une information particulière du capteur
 
 
 ```
-Il s'agit ici de simples suggestions, à vous de fournir une application console regroupant desfonctionnalités utiles aux datascientists. Cette application doit être simple et conviviale.
+Il s'agit ici de simples suggestions, à vous de fournir une application console regroupant desfonctionnalités utiles aux datascientists. 
+Cette application doit être simple et conviviale.
 ```
 
 
@@ -75,11 +85,14 @@ Il s'agit ici de simples suggestions, à vous de fournir une application console
 
 
 ```
-Afin de disposer de ces données, vous aurez la possibilité de vous connecter via le protocole SSH. Toutes les informations de connexion (adresse IP, login et mot de passe, clé) vous seront communiquées ultérieurement.
+Afin de disposer de ces données, vous aurez la possibilité de vous connecter via le protocole SSH. 
+Toutes les informations de connexion (adresse IP, login et mot de passe, clé) vous seront communiquées ultérieurement.
 
-L’ensemble des travaux réalisés devra être mis sur un dépôt afin de centraliser les informations et de faciliter la communication entre les membres du projet. Vous ferez en sorte de bien vous répartir les tâches.
+L’ensemble des travaux réalisés devra être mis sur un dépôt afin de centraliser les informations et de faciliter 
+la communication entre les membres du projet. Vous ferez en sorte de bien vous répartir les tâches.
 
-Vous constituerez une présentation (PowerPoint ou équivalent) qui vous servira de fil conducteur pour le jour de la soutenance. Lors de la soutenance, il va de soi que le temps de parole entre chacun des membres du groupe devra être équilibré.
+Vous constituerez une présentation (PowerPoint ou équivalent) qui vous servira de fil conducteur 
+pour le jour de la soutenance. Lors de la soutenance, il va de soi que le temps de parole entre chacun des membres du groupe devra être équilibré.
 ```
 
 # Note
