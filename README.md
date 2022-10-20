@@ -17,7 +17,8 @@ Dans un premier temps, on distingue 2 Raspberry interconnectés en utilisant le 
 ```
 ```
  D'un côté, l'un des Raspberry qu'on appellera "Balise" doté de différents capteurs se charge de collecter 
- régulièrement les informations fournies par les capteurs. De l'autre côté, le second Raspberry qu'on appellera "Maître" via le protocole TX/RX récupère ces données. 
+ régulièrement les informations fournies par les capteurs. De l'autre côté, le second Raspberry qu'on appellera 
+ "Maître" via le protocole TX/RX récupère ces données. 
  
  Il va de soi qu'en cas de redémarrage de la "Balise", le programme de collecte des informations devra se relancer automatiquement. 
 ```
@@ -64,7 +65,9 @@ oou d'une information particulière du capteur
 
 
 ```
-Il s'agit ici de simples suggestions, à vous de fournir une application console regroupant desfonctionnalités utiles aux datascientists. 
+Il s'agit ici de simples suggestions, à vous de fournir une application console regroupant desfonctionnalités 
+utiles aux datascientists. 
+
 Cette application doit être simple et conviviale.
 ```
 
@@ -92,7 +95,8 @@ L’ensemble des travaux réalisés devra être mis sur un dépôt afin de centr
 la communication entre les membres du projet. Vous ferez en sorte de bien vous répartir les tâches.
 
 Vous constituerez une présentation (PowerPoint ou équivalent) qui vous servira de fil conducteur 
-pour le jour de la soutenance. Lors de la soutenance, il va de soi que le temps de parole entre chacun des membres du groupe devra être équilibré.
+pour le jour de la soutenance. Lors de la soutenance, il va de soi que le temps de parole entre 
+chacun des membres du groupe devra être équilibré.
 ```
 
 # Note
