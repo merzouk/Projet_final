@@ -8,7 +8,8 @@ Ces logs seront destinés à être utilisés par des DataScientists.
 
 ```
 Afin de mieux présenter les éléments, on commencera par définir les composantes de l'architecture globale. 
-Ensuite, on présentera les différents composants utilisés. Pour finir, on présentera les livrables à fournir lors de la soutenance.
+Ensuite, on présentera les différents composants utilisés. Pour finir, on présentera les livrables 
+à fournir lors de la soutenance.
 ```
 ## Le système de collecte des données est découpé en plusieurs parties :
 
@@ -20,7 +21,8 @@ Dans un premier temps, on distingue 2 Raspberry interconnectés en utilisant le 
  régulièrement les informations fournies par les capteurs. De l'autre côté, le second Raspberry qu'on appellera 
  "Maître" via le protocole TX/RX récupère ces données. 
  
- Il va de soi qu'en cas de redémarrage de la "Balise", le programme de collecte des informations devra se relancer automatiquement. 
+ Il va de soi qu'en cas de redémarrage de la "Balise", le programme de collecte des informations devra 
+ se relancer automatiquement. 
 ```
 
 ```
@@ -30,7 +32,8 @@ Dans un premier temps, on distingue 2 Raspberry interconnectés en utilisant le 
 
 
 ```
-Une fois ces données récupérées par le "Maître", celles-ci doivent être formatées au format json en vue de les envoyer à un serveur TCP.
+Une fois ces données récupérées par le "Maître", celles-ci doivent être formatées au format json en vue de les 
+envoyer à un serveur TCP.
 ```
 
 
