@@ -42,7 +42,7 @@ Une fois ces données récupérées par le "Maître", celles-ci doivent être fo
 
 
 ```
-- Rouge clignotant
+- Rouge : clignotant
 - Yellow : Etat normal
 - Green : indique la présence d'une nouvelle valeur : Etat normal : indique un transfert du maitre vers le TCP
 ```
