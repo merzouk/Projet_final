@@ -203,7 +203,7 @@ namespace Manage
                   cout << "Aucune donnee chargee, traitement termine "<<endl;
                   string command = "/home/ubuntu/scripts/mv_faillures.sh";
                   command = command + "  " + path_to_file;
-                  system(command.s_str());
+                  system(command.c_str());
                   return 1;
            }
            DataAccessObject * dataAccessObject = new DataAccessObject();
@@ -215,7 +215,7 @@ namespace Manage
 
             string command = "/home/ubuntu/scripts/mv_success.sh";
             command = command + "  " + path_to_file;
-            system(command.s_str());
+            system(command.c_str());
            return 0;
        }
 }
