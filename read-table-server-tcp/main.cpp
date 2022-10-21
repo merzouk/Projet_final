@@ -69,8 +69,7 @@ int main(int argc, char ** argv)
               }
               catch(exception & ex)
               {
-                     cout << "Erreur durant le traitement requete : " << message_request << ex.what() << endl;
-                     send_(socket_, "Error response");
+                     cout << "Erreur durant le traitement requete : " << ex.what() << endl;
                      cout << "Server TCP : sent response to client faillures !" << endl;
               }
         }
