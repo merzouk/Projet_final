@@ -193,3 +193,7 @@ ajouter la ligne ci-dessous :
 ```
 De cette façon, le programme d'insertion en base, s'execute une fois toute les deux minutes.
 ```
+
+#Diagramme :
+
+![My Image](./pictures/Diagram.png)
