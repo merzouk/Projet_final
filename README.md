@@ -197,3 +197,7 @@ De cette façon, le programme d'insertion en base, s'execute une fois toute les 
 #Diagramme :
 
 ![My Image](./pictures/Diagramme.png)
+
+#Diagramme technique
+
+![My Image](./pictures/Diagramme1.jpg)
