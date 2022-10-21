@@ -1,5 +1,10 @@
 #!/bin/sh
+source=/home/ubuntu/datas/
 
-./insert_db /home/ubuntu/datas/datas.json /usr/local/db/db_temperature.db
+for entry in "$source"*;
+do
+        ./insert_db "$entry"  /usr/local/db/db_temperature.db
+        sleep 1
+done
 
 exit 0

@@ -201,7 +201,9 @@ namespace Manage
            {
                   cout << "Fichier charge : " << path_to_file << endl;
                   cout << "Aucune donnee chargee, traitement termine "<<endl;
-                  system("/home/ubuntu/scripts/mv_faillures.sh");
+                  string command = "/home/ubuntu/scripts/mv_faillures.sh";
+                  command = command + "  " + path_to_file;
+                  system(command.s_str());
                   return 1;
            }
            DataAccessObject * dataAccessObject = new DataAccessObject();
@@ -211,8 +213,9 @@ namespace Manage
            delete dataAccessObject;
            dataAccessObject = nullptr;
 
-           system("/home/ubuntu/scripts/mv_success.sh");
-
+            string command = "/home/ubuntu/scripts/mv_success.sh";
+            command = command + "  " + path_to_file;
+            system(command.s_str());
            return 0;
        }
 }
