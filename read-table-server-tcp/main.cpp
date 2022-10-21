@@ -48,6 +48,8 @@ int main(int argc, char ** argv)
 
        while (1)
        {
+              try
+              {
                 tcp::acceptor acceptor_(io_service, tcp::endpoint(tcp::v4(), port));
 
                 tcp::socket socket_(io_service);
@@ -64,6 +66,13 @@ int main(int argc, char ** argv)
                 send_(socket_, message_response);
 
                 cout << "Server TCP : sent response to client successfully !" << endl;
+              }
+              catch(exception & ex)
+              {
+                     cout << "Erreur durant le traitement requete : " << message_request << ex.what() << endl;
+                     send_(socket_, "Error response");
+                     cout << "Server TCP : sent response to client faillures !" << endl;
+              }
         }
         delete factory;
         factory = nullptr;
