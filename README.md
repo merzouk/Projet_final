@@ -108,7 +108,7 @@ Les tests en ligne de commande sont réalisés sous Debian 11
 ```
 
 
-# Procédure installation de la librairie Boost 1_80
+# Procédure installation de la librairie Boost 1_80_0
 
 ```
 wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
