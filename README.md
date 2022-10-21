@@ -149,9 +149,44 @@ int main()
   std::cout <<"BOOST_LIB_VERSION : "<< BOOST_LIB_VERSION << std::endl;
   return 0;
 }
-
 ```
 
+# Ajout job dans crontab
 
+```
+L'intervalle d'execution du programme d'insertion en base de donnees est parametrable, pour le moment c'est chaque 2 minutes :
+```
 
+```
+le shell "run_prog_insert_datas.sh" se trouve dans le repertoire : /home/ubuntu/projet_final/insert/
+```
 
+```
+ls -l /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
+
+chmod +x  /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
+
+ls -l /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
+```
+
+```
+ouvrir la table des jobs crontab .
+```
+
+```
+crontab -e 
+
+propose de choisir l'editeur de texte :
+```
+
+```
+ajouter la ligne ci-dessous :
+```
+
+```
+*/2 * * * *  cd /home/ubuntu/projet_final/insert && sh  run_prog_insert_datas.sh
+```
+
+```
+De cette façon, le programme d'insertion en base, s'execute une fois toute les deux minutes.
+```
