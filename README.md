@@ -106,3 +106,52 @@ Les développements et les tests sont réalisés en totalité sous codeBlocks po
 
 Les tests en ligne de commande sont réalisés sous Debian 11
 ```
+
+
+# Procédure installation de la librairie Boost 1_80
+
+```
+wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
+```
+
+```
+tar -xvzf boost_1_80_0.tar.gz
+```
+
+```
+cd boost_1_80_0/
+```
+
+```
+./bootstrap.sh
+```
+
+```
+sudo ./b2 install threading=multi link=shared
+
+```
+
+## Remarque : 
+
+```
+si une vesrion ultérieure de boost est installée, il faut commencer par la désintaller, pour vérifier 
+
+il suffit de compiler et exécuter le code ci-dessous :
+
+```
+
+```
+#include <iostream>
+#include <boost/version.hpp>
+
+int main() 
+{
+  std::cout <<"BOOST_LIB_VERSION : "<< BOOST_LIB_VERSION << std::endl;
+  return 0;
+}
+
+```
+
+
+
+
