@@ -194,10 +194,10 @@ ajouter la ligne ci-dessous :
 De cette façon, le programme d'insertion en base, s'execute une fois toute les deux minutes.
 ```
 
-#Diagramme :
+# Diagramme :
 
 ![My Image](./pictures/Diagramme.png)
 
-#Diagramme technique
+# Diagramme technique
 
 ![My Image](./pictures/Diagramme2.jpg)
