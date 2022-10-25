@@ -54,14 +54,14 @@ namespace Manage
                      json_str += to_string(data->get_heure())+":"+ to_string(data->get_minute())+":"+ to_string(data->get_seconde())+"', ";
                      json_str +=" sensor_id: '" +data->get_identite_capt()+ "', ";
                      json_str +=" temperature: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" humidity: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" pressure: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" gyro_x: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" gyro_y: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" gyro_z: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" accel_x: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" accel_y: " + to_string(data->get_temperature())+ ", ";
-                     json_str +=" accel_z: " + to_string(data->get_temperature())+ "}}";
+                     json_str +=" humidity: " + to_string(data->get_humidity())+ ", ";
+                     json_str +=" pressure: " + to_string(data->get_pressure())+ ", ";
+                     json_str +=" gyro_x: " + to_string(data->get_gyro_x())+ ", ";
+                     json_str +=" gyro_y: " + to_string(data->get_gyro_y())+ ", ";
+                     json_str +=" gyro_z: " + to_string(data->get_gyro_z())+ ", ";
+                     json_str +=" accel_x: " + to_string(data->get_accel_x())+ ", ";
+                     json_str +=" accel_y: " + to_string(data->get_accel_y())+ ", ";
+                     json_str +=" accel_z: " + to_string(data->get_accel_z())+ "}}";
                      json_string_vect.push_back(json_str);
               }
               return json_string_vect;
