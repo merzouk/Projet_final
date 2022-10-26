@@ -27,8 +27,28 @@ namespace Manage
                      BoostTools *boostTools;
 
               public:
-                     Console(int port, string ip_address):port(port), ip_address(ip_address){ display = new Display(); utils = new Utils(); constantes = new Constantes(); boostTools = new BoostTools();  jsonTools = new JsonTools();}
-                     ~Console(){ delete display; display = nullptr; delete utils; utils = nullptr; delete boostTools; boostTools = nullptr; delete constantes; constantes = nullptr; delete jsonTools; jsonTools = nullptr;}
+                     Console(int port, string ip_address)
+                            :port(port), ip_address(ip_address)
+                            {
+                                   display = new Display();
+                                   utils = new Utils();
+                                   constantes = new Constantes();
+                                   boostTools = new BoostTools();
+                                   jsonTools = new JsonTools();
+                            }
+                     ~Console()
+                            {
+                                   delete display;
+                                   display = nullptr;
+                                   delete utils;
+                                   utils = nullptr;
+                                   delete boostTools;
+                                   boostTools = nullptr;
+                                   delete constantes;
+                                   constantes = nullptr;
+                                   delete jsonTools;
+                                   jsonTools = nullptr;
+                             }
                      void load_all_datas();
                      void load_data_by_id();
                      void load_data_by_capteur_name();

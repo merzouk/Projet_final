@@ -35,7 +35,6 @@ void send_(tcp::socket &socket, const string &message) {
 
 int main(int argc, char ** argv)
 {
-
        int port =  atoi(argv[1]);
        if(port == 0)
        {
@@ -59,6 +58,7 @@ int main(int argc, char ** argv)
                 string message_request = read_(socket_);
 
                 cout <<"message request : " << message_request << endl;
+
                 string message_response = factory->load_message_response(message_request);
 
                 cout << "message response : " << endl << message_response << endl;

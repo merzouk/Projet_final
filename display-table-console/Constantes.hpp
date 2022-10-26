@@ -50,7 +50,6 @@ namespace Manage
                      {
                             return this->ip_address;
                      }
-
               };
 }
 
