@@ -201,3 +201,8 @@ De cette façon, le programme d'insertion en base, s'execute une fois toute les 
 # Diagramme technique
 
 ![My Image](./pictures/Diagramme2.jpg)
+
+# Vue générale du fonctionnement des différentes parties
+
+![My Image](./pictures/diagramme_general.jpg)
+
