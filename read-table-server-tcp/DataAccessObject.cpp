@@ -1,4 +1,3 @@
-
 #include <vector>
 #include "DatasCapteur.hpp"
 #include "DataAccessObject.hpp"
@@ -103,8 +102,7 @@ namespace DataAccess
                        }
                        return datas;
                 }
-
-               // close database
+                // close database
                 if(db)
                 {
                   sqlite3_close(db);
