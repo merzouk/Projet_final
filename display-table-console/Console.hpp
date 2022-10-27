@@ -4,7 +4,6 @@
 #include "DatasCapteur.hpp"
 #include "Display.hpp"
 #include "Utils.hpp"
-#include "Constantes.hpp"
 #include "BoostTools.hpp"
 #include "JsonTools.hpp"
 
@@ -20,7 +19,6 @@ namespace Manage
               private:
                      Display * display;
                      Utils * utils;
-                     Constantes * constantes;
                      JsonTools * jsonTools;
                      int port;
                      string ip_address;
@@ -32,7 +30,6 @@ namespace Manage
                             {
                                    display = new Display();
                                    utils = new Utils();
-                                   constantes = new Constantes();
                                    boostTools = new BoostTools();
                                    jsonTools = new JsonTools();
                             }
@@ -44,8 +41,6 @@ namespace Manage
                                    utils = nullptr;
                                    delete boostTools;
                                    boostTools = nullptr;
-                                   delete constantes;
-                                   constantes = nullptr;
                                    delete jsonTools;
                                    jsonTools = nullptr;
                              }
