@@ -112,7 +112,7 @@ namespace Manage
            std::ifstream properties(file_name);
            if (properties.is_open())
            {
-              std::string line;
+              std::string  line;
               while (std::getline(properties, line))
               {
                     tokenize(line, delimiter);
