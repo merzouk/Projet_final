@@ -7,7 +7,7 @@ namespace Manage
        {
                 string sql = manageProperties->get_value_by_key("sql_query");
                 const char *sql_query = sql.c_str();
-                vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
+                vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
                 return vect_datas;
        }
 
@@ -15,7 +15,7 @@ namespace Manage
         {
              string sql = manageProperties->get_value_by_key("sql_by_id");
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
         }
 
@@ -23,7 +23,7 @@ namespace Manage
         {
              string sql = manageProperties->get_value_by_key("sql_by_cpt_id") +capteur_id+"'";
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
         }
 
@@ -31,7 +31,7 @@ namespace Manage
        {
              string sql = manageProperties->get_value_by_key("sql_by_day") + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
        }
 
@@ -39,7 +39,7 @@ namespace Manage
        {
              string sql = manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
        }
 
