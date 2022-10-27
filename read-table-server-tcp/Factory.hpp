@@ -34,7 +34,7 @@ namespace Manage
                      vector<std::string> convert_object_to_json_string(vector<DatasCapteur *> vect_datas);
                      std::string load_message_response(std::string msg_request, ManageProperties * manageProperties);
                      std::string traitment_loading_datas(int choix, int id,
-                                           string capteur_name, int minute, int hour, int day, int month, int year);
+                                           string capteur_name, int minute, int hour, int day, int month, int year, ManageProperties * manageProperties);
        };
 }
 #endif // FACTORY_H_FILE
