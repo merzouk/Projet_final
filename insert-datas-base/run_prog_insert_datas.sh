@@ -1,9 +1,9 @@
 #!/bin/sh
-source=/home/ubuntu/datas/
+source=/home/mrzk/datas/
 
 for entry in "$source"*;
 do
-        ./insert_db "$entry"  /usr/local/db/db_temperature.db
+        ./insert_db "$entry"  /usr/local/db/meteo.db
         sleep 1
 done
 
