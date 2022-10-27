@@ -39,7 +39,6 @@ namespace Manage
 
        void ManageProperties::display_map_properties()
        {
-                     //cout << "map_properties.size()  : " << this->map_properties.size() << endl;
                      if(this->map_properties.size() == 0)
                      {
                             return ;
@@ -77,7 +76,6 @@ namespace Manage
                      if (check_elt_by_key(key) == " ")
                      {
                             this->map_properties[key] =  value;
-                            //cout << key << "  :  " << value << endl;
                      }
                      else
                      {

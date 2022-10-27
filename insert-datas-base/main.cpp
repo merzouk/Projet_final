@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
 {
     if(argc == 4)
     {
-
        string path_to_json_file = argv[1];
        const char * path_data_base = argv[2];
        string properties_file = argv[3];
