@@ -9,4 +9,4 @@ docs/
 *.zip
 *.json
 *.sh
-client
+*client
