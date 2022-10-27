@@ -7,6 +7,4 @@ docs/
 *.o
 *.exe
 *.zip
-*.json
-*.sh
-*client
+client
