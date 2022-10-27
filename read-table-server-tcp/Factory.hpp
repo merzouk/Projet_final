@@ -26,11 +26,11 @@ namespace Manage
               public:
                      Factory(){ dataAccessObject = new DataAccessObject(); utils = new Utils(); constantes = new Constantes();}
                      ~Factory(){ delete dataAccessObject; dataAccessObject = nullptr; delete utils; utils = nullptr;}
-                     vector<DatasCapteur *> load_all_datas();
-                     vector<DatasCapteur *> load_data_by_id(int id);
-                     vector<DatasCapteur *> load_data_by_capteur_name(string capteur_id);
-                     vector<DatasCapteur *> load_data_by_date(int day, int month, int year);
-                     vector<DatasCapteur *> load_data_by_hour(int minute, int hour);
+                     vector<DatasCapteur *> load_all_datas(ManageProperties * manageProperties);
+                     vector<DatasCapteur *> load_data_by_id(int id, ManageProperties * manageProperties);
+                     vector<DatasCapteur *> load_data_by_capteur_name(string capteur_id, ManageProperties * manageProperties);
+                     vector<DatasCapteur *> load_data_by_date(int day, int month, int year, ManageProperties * manageProperties);
+                     vector<DatasCapteur *> load_data_by_hour(int minute, int hour), ManageProperties * manageProperties;
                      vector<std::string> convert_object_to_json_string(vector<DatasCapteur *> vect_datas);
                      std::string load_message_response(std::string msg_request, ManageProperties * manageProperties);
                      std::string traitment_loading_datas(int choix, int id,
