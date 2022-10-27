@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
        ManageProperties * manageProperties = new ManageProperties();
        manageProperties->read_contains_properties_file(properties_file, ':');
 
-       JsonTools * jsonTools = new JsonTools();
+       JsonTools * jsonTools = new JsonTools(manageProperties);
        int res = jsonTools->build_Object_from_json_save(path_to_json_file, path_data_base);
        delete jsonTools;
        jsonTools = nullptr;

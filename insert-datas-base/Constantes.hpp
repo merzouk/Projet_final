@@ -13,9 +13,7 @@ namespace Manage
               class Constantes
               {
                      private:
-                           string sql_insert = "INSERT INTO temp_datas(identite_capt, temperature, humidity, pressure , "+
-                                               "gyro_x, gyro_y, gyro_z, accel_x, accel_y, accel_z, "+
-                                               "seconde, minute, heure, jour, mois, annee) VALUES ('";
+                           string sql_insert = "INSERT INTO temp_datas(identite_capt, temperature, humidity, pressure , gyro_x, gyro_y, gyro_z, accel_x, accel_y, accel_z, seconde, minute, heure, jour, mois, annee) VALUES ('";
                      public:
                             Constantes(){}
                             ~Constantes(){}
