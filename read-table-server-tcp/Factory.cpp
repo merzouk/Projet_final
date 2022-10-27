@@ -13,7 +13,7 @@ namespace Manage
 
         vector<DatasCapteur *> Factory::load_data_by_id(int id)
         {
-             string sql = this->manageProperties->get_value_by_key("sql_by_id");
+             string sql = this->manageProperties->get_value_by_key("sql_by_id") +to_string(id);
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
