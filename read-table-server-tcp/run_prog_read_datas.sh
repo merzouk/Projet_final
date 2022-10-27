@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 if [ "$#" -eq 0 ]; then
         echo "Le numero de port du server TCP n'est pas renseigne"
         exit 1

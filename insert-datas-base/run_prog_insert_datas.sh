@@ -1,4 +1,5 @@
 #!/bin/sh
+
 source=/home/mrzk/datas/
 
 for entry in "$source"*;
