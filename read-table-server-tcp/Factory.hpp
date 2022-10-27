@@ -4,7 +4,6 @@
 #include "DatasCapteur.hpp"
 #include "DataAccessObject.hpp"
 #include "Utils.hpp"
-#include "Constantes.hpp"
 #include "ManageProperties.hpp"
 
 #include <vector>
@@ -21,10 +20,9 @@ namespace Manage
               private:
                      DataAccessObject * dataAccessObject;
                      Utils * utils;
-                     Constantes * constantes;
 
               public:
-                     Factory(){ dataAccessObject = new DataAccessObject(); utils = new Utils(); constantes = new Constantes();}
+                     Factory(){ dataAccessObject = new DataAccessObject(); utils = new Utils(); }
                      ~Factory(){ delete dataAccessObject; dataAccessObject = nullptr; delete utils; utils = nullptr;}
                      vector<DatasCapteur *> load_all_datas(ManageProperties * manageProperties);
                      vector<DatasCapteur *> load_data_by_id(int id, ManageProperties * manageProperties);
