@@ -47,10 +47,10 @@ int main(int argc, char ** argv)
 
        if(port < 0) port *=-1;
        boost::asio::io_service io_service;
-       Factory *factory = new Factory();
+
        ManageProperties * manageProperties = new ManageProperties();
        manageProperties->read_contains_properties_file(file_name, ':');
-
+       Factory *factory = new Factory(manageProperties);
        while (1)
        {
               try
@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
 
                 cout <<"message request : " << message_request << endl;
 
-                string message_response = factory->load_message_response(message_request, manageProperties);
+                string message_response = factory->load_message_response(message_request);
 
                 cout << "message response : " << endl << message_response << endl;
 
