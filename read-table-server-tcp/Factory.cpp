@@ -6,44 +6,40 @@ namespace Manage
        vector<DatasCapteur *> Factory::load_all_datas(ManageProperties * manageProperties)
        {
                 string sql = manageProperties->get_value_by_key("sql_query");
-                const char *sql_query = sql.c_str();//this->constantes->get_query_all();
-                vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
+                const char *sql_query = sql.c_str();
+                vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
                 return vect_datas;
        }
 
         vector<DatasCapteur *> Factory::load_data_by_id(int id , ManageProperties * manageProperties)
         {
              string sql = manageProperties->get_value_by_key("sql_by_id");
-             //string sql = this->constantes->get_query_by_id() + to_string(id);
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
              return vect_datas;
         }
 
         vector<DatasCapteur *> Factory::load_data_by_capteur_name(string capteur_id , ManageProperties * manageProperties)
         {
-             string sql = manageProperties->get_value_by_key("sql_by_cpt_id");
-             //string sql =  this->constantes->get_query_by_capt_id() +capteur_id+"'";
+             string sql = manageProperties->get_value_by_key("sql_by_cpt_id") +capteur_id+"'";
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
              return vect_datas;
         }
 
        vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year , ManageProperties * manageProperties)
        {
              string sql = manageProperties->get_value_by_key("sql_by_day") + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
-             //string sql = this->constantes->get_query_by_day() + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
              return vect_datas;
        }
 
        vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour , ManageProperties * manageProperties)
        {
              string sql = manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
-             //string sql = this->constantes->get_query_by_hour() + to_string(hour)+" and minute = "+to_string(minute);
              const char *sql_query = sql.c_str();
-             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
+             vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(manageProperties->get_value_by_key("url_data_base"), sql_query);
              return vect_datas;
        }
 

@@ -7,7 +7,6 @@
 #include "ManageProperties.hpp"
 
 #include <vector>
-
 #include <fstream>
 using namespace Datas;
 using namespace DataAccess;
