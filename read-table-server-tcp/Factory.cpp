@@ -30,6 +30,7 @@ namespace Manage
        vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year)
        {
              string sql = this->manageProperties->get_value_by_key("sql_by_day") + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
+             cout <<"sql ===> " << sql << endl;
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
