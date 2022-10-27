@@ -5,6 +5,7 @@
 #include "DataAccessObject.hpp"
 #include "Utils.hpp"
 #include "Constantes.hpp"
+#include "ManageProperties.hpp"
 
 #include <vector>
 
@@ -31,7 +32,7 @@ namespace Manage
                      vector<DatasCapteur *> load_data_by_date(int day, int month, int year);
                      vector<DatasCapteur *> load_data_by_hour(int minute, int hour);
                      vector<std::string> convert_object_to_json_string(vector<DatasCapteur *> vect_datas);
-                     std::string load_message_response(std::string msg_request);
+                     std::string load_message_response(std::string msg_request, ManageProperties * manageProperties);
                      std::string traitment_loading_datas(int choix, int id,
                                            string capteur_name, int minute, int hour, int day, int month, int year);
        };

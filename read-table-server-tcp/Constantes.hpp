@@ -12,7 +12,7 @@ namespace Manage
               class Constantes
               {
               private:
-                     const char * url_data_base = "/usr/local/db/db_temperature.db";
+                     const char * url_data_base = "/usr/local/db/meteo.db";
                      const char *sql_query = "SELECT * FROM temp_datas";
                      string sql_by_id = "SELECT * FROM temp_datas where id = ";
                      string sql_by_cpt_id = "SELECT * FROM temp_datas where identite_capt = '";

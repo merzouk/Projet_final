@@ -3,40 +3,45 @@
 
 namespace Manage
 {
-       vector<DatasCapteur *> Factory::load_all_datas()
+       vector<DatasCapteur *> Factory::load_all_datas(ManageProperties * manageProperties)
        {
-                const char *sql_query = this->constantes->get_query_all();
+                string sql = manageProperties->get_value_by_key("sql_query");
+                const char *sql_query = sql.c_str();//this->constantes->get_query_all();
                 vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
                 return vect_datas;
        }
 
-        vector<DatasCapteur *> Factory::load_data_by_id(int id)
+        vector<DatasCapteur *> Factory::load_data_by_id(int id , ManageProperties * manageProperties)
         {
-             string sql = this->constantes->get_query_by_id() + to_string(id);
+             string sql = manageProperties->get_value_by_key("sql_by_id");
+             //string sql = this->constantes->get_query_by_id() + to_string(id);
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
              return vect_datas;
         }
 
-        vector<DatasCapteur *> Factory::load_data_by_capteur_name(string capteur_id)
+        vector<DatasCapteur *> Factory::load_data_by_capteur_name(string capteur_id , ManageProperties * manageProperties)
         {
-             string sql =  this->constantes->get_query_by_capt_id() +capteur_id+"'";
+             string sql = manageProperties->get_value_by_key("sql_by_cpt_id");
+             //string sql =  this->constantes->get_query_by_capt_id() +capteur_id+"'";
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
              return vect_datas;
         }
 
-       vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year)
+       vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year , ManageProperties * manageProperties)
        {
-             string sql = this->constantes->get_query_by_day() + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
+             string sql = manageProperties->get_value_by_key("sql_by_day") + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
+             //string sql = this->constantes->get_query_by_day() + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
              return vect_datas;
        }
 
-       vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour)
+       vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour , ManageProperties * manageProperties)
        {
-             string sql = this->constantes->get_query_by_hour() + to_string(hour)+" and minute = "+to_string(minute);
+             string sql = manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
+             //string sql = this->constantes->get_query_by_hour() + to_string(hour)+" and minute = "+to_string(minute);
              const char *sql_query = sql.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->constantes->get_url_db(), sql_query);
              return vect_datas;
@@ -70,28 +75,28 @@ namespace Manage
 
        std::string Factory::traitment_loading_datas(int choix, int id,
                 string capteur_name, int minute, int hour, int day, int month,
-                int year) {
+                int year, ManageProperties * manageProperties) {
                vector<DatasCapteur*> vect_datas;
                vect_datas.clear();
                if(choix == 1)
                {
-                       vect_datas = load_all_datas();
+                       vect_datas = load_all_datas(manageProperties);
                }
                else if (choix == 2)
                {
-                       vect_datas = load_data_by_id(id);
+                       vect_datas = load_data_by_id(id, manageProperties);
                }
                else if(choix == 3)
                {
-                       vect_datas = load_data_by_capteur_name(capteur_name);
+                       vect_datas = load_data_by_capteur_name(capteur_name, manageProperties);
                }
                else if(choix == 4)
                {
-                       vect_datas = load_data_by_date(day, month, year);
+                       vect_datas = load_data_by_date(day, month, year, manageProperties);
                }
                else if(choix == 5)
                {
-                       vect_datas = load_data_by_hour(minute, hour);
+                       vect_datas = load_data_by_hour(minute, hour, manageProperties);
                }
                std::vector < std::string > json_string_vect =
                                convert_object_to_json_string(vect_datas);
@@ -106,7 +111,7 @@ namespace Manage
                return json_string;
        }
 
-       std::string Factory::load_message_response(std::string msg_request)
+       std::string Factory::load_message_response(std::string msg_request, ManageProperties * manageProperties)
        {
         RSJresource  resource (msg_request); // RSJ parser (delayed parser)
         int choix = resource["datas"]["choix"].as<int>(0);
@@ -120,13 +125,13 @@ namespace Manage
                 string id_capteur = resource["datas"]["sensor_id"].as<std::string>("uknows_sensor");
                 json_response = traitment_loading_datas(choix, 0, id_capteur, 0, 0, 0, 0, 0);
         } else if (choix == 4) {
-                int day = resource["datas"]["day"].as<int>(0);
+                int day   = resource["datas"]["day"].as<int>(0);
                 int month = resource["datas"]["month"].as<int>(0);
-                int year = resource["datas"]["year"].as<int>(0);
+                int year  = resource["datas"]["year"].as<int>(0);
                 json_response = traitment_loading_datas(choix, 0, "", 0, 0, day, month, year);
         } else if (choix == 5) {
-                int minute = resource["datas"]["minute"].as<int>(0);
-                int hour   = resource["datas"]["hour"].as<int>(0);
+                int minute    = resource["datas"]["minute"].as<int>(0);
+                int hour      = resource["datas"]["hour"].as<int>(0);
                 json_response = traitment_loading_datas(choix, 0, "", minute, hour, 0, 0, 0);
         }
         return json_response;

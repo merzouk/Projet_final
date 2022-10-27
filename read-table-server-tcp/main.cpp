@@ -2,6 +2,7 @@
 #include "Parser.hpp"
 #include <iostream>
 #include <boost/asio.hpp>
+#include "ManageProperties.hpp"
 
 using namespace boost::asio;
 using ip::tcp;
@@ -36,14 +37,19 @@ void send_(tcp::socket &socket, const string &message) {
 int main(int argc, char ** argv)
 {
        int port =  atoi(argv[1]);
+       std::string file_name = argv[2];
+
        if(port == 0)
        {
               cout << "Le numero de port n'est pas renseigne, connexion impossible : " << port << endl;
               return 1;
        }
+
        if(port < 0) port *=-1;
        boost::asio::io_service io_service;
        Factory *factory = new Factory();
+       ManageProperties * manageProperties = new ManageProperties();
+       manageProperties->read_contains_properties_file(file_name, ':');
 
        while (1)
        {
@@ -59,7 +65,7 @@ int main(int argc, char ** argv)
 
                 cout <<"message request : " << message_request << endl;
 
-                string message_response = factory->load_message_response(message_request);
+                string message_response = factory->load_message_response(message_request, manageProperties);
 
                 cout << "message response : " << endl << message_response << endl;
 
@@ -75,6 +81,10 @@ int main(int argc, char ** argv)
         }
         delete factory;
         factory = nullptr;
+
+        delete manageProperties;
+        manageProperties = nullptr;
+
         return 0;
 }
 
