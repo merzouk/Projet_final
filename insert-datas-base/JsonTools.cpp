@@ -201,7 +201,7 @@ namespace Manage
            {
                   cout << "Fichier charge : " << path_to_file << endl;
                   cout << "Aucune donnee chargee, traitement termine "<<endl;
-                  string command = "/home/ubuntu/scripts/mv_faillures.sh";
+                  string command = this->manageProperties->get_value_by_key("script_faillures");
                   command = command + "  " + path_to_file;
                   system(command.c_str());
                   return 1;
@@ -213,7 +213,7 @@ namespace Manage
            delete dataAccessObject;
            dataAccessObject = nullptr;
 
-            string command = "/home/ubuntu/scripts/mv_success.sh";
+            string command = this->manageProperties->get_value_by_key("script_success");
             command = command + "  " + path_to_file;
             system(command.c_str());
            return 0;
