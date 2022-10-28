@@ -81,21 +81,21 @@ namespace Manage
 
                      cout << setw(7)  << data->get_id() <<"|"
                           << setw(20) << data->get_identite_capt() <<"|"
-                          << setw(13) << data->get_temperature() <<"|"
-                          << setw(10) << data->get_humidity() <<"|"
-                          << setw(10) << data->get_pressure() <<"|"
+                          << setw(13) << data->get_temperature()   <<"|"
+                          << setw(10) << data->get_humidity()      <<"|"
+                          << setw(10) << data->get_pressure()      <<"|"
 
-                          << setw(10) << data->get_gyro_x() <<"|"
-                          << setw(10) << data->get_gyro_y() <<"|"
-                          << setw(10) << data->get_gyro_z() <<"|"
+                          << setw(10) << data->get_gyro_x()        <<"|"
+                          << setw(10) << data->get_gyro_y()        <<"|"
+                          << setw(10) << data->get_gyro_z()        <<"|"
 
-                          << setw(10) << data->get_accel_x() <<"|"
-                          << setw(10) << data->get_accel_y() <<"|"
-                          << setw(10) << data->get_accel_z() <<"|"
+                          << setw(10) << data->get_accel_x()       <<"|"
+                          << setw(10) << data->get_accel_y()       <<"|"
+                          << setw(10) << data->get_accel_z()       <<"|"
 
-                          << setw(15) << build_date(data)    <<"|"
-                          << setw(10) << build_hour(data)    <<"|"
-                                                             << endl;
+                          << setw(15) << build_date(data)          <<"|"
+                          << setw(10) << build_hour(data)          <<"|"
+                                                                   << endl;
        }
 
        void JsonTools::print_list_data(vector<DatasCapteur *> datas)
@@ -240,5 +240,4 @@ namespace Manage
            convert_time_and_extract_infos(datasCapteur, str_date);
            return datasCapteur;
        }
-
 }

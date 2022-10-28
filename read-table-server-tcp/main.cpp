@@ -18,6 +18,11 @@ using std::endl;
 #include <cstring>
 #include <bits/stdc++.h>
 
+#include "Logger.hpp"
+
+#include <chrono> //milliseconds
+#include <thread> //sleep_for
+
 using namespace Manage;
 
 string read_(tcp::socket &socket) {
@@ -36,17 +41,25 @@ void send_(tcp::socket &socket, const string &message) {
 
 int main(int argc, char ** argv)
 {
+       // Initiate logger (default name is 'log')
+       LOG_INIT_CERR();
+
+       if(argc < 3)
+       {
+            log(LOG_ERR)  << "Entree du programme attend trois arguments exec, port et et path vers le fichier de resources\n";
+            return 1;
+       }
        int port =  atoi(argv[1]);
        std::string properties_file = argv[2];
 
        if(port == 0)
        {
-              cout << "Le numero de port n'est pas renseigne, connexion impossible : " << port << endl;
+              log(LOG_ERR)  <<  "Le numero de port n'est pas renseigne, connexion impossible : " +std::to_string(port) + "\n" ;
               return 1;
        }
        if(properties_file.size() == 0)
 	{
-	     cout << "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " << port << endl;
+	    log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
             return 1;
 	}
        if(port < 0) port *=-1;
@@ -56,7 +69,7 @@ int main(int argc, char ** argv)
        manageProperties->read_contains_properties_file(properties_file, ':');
        if(manageProperties->size_map() == 0)
 	{
-	     cout << "Aucun parametre trouve dans le fichier ressources, connexion impossible : " << port << endl;
+	     log(LOG_ERR)  <<   "Aucun parametre trouve dans le fichier ressources, connexion impossible\n";
             return 1;
 	}
 
@@ -85,8 +98,8 @@ int main(int argc, char ** argv)
               }
               catch(exception & ex)
               {
-                     cout << "Erreur durant le traitement requete : " << ex.what() << endl;
-                     cout << "Server TCP : sent response to client faillures !" << endl;
+                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " + ex.what() + "\n";
+                     log(LOG_ERR)  << "Server TCP : sent response to client faillures !\n" ;
               }
         }
         delete factory;

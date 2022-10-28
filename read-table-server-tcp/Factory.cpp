@@ -119,27 +119,27 @@ namespace Manage
 
        std::string Factory::load_message_response(std::string msg_request)
        {
-        RSJresource  resource (msg_request); // RSJ parser (delayed parser)
-        int choix = resource["datas"]["choix"].as<int>(0);
-        string json_response = "";
-        if (choix == 1) {
-                json_response = traitment_loading_datas(choix, 0, "", 0, 0, 0, 0, 0);
-        } else if (choix == 2) {
-                int id = resource["datas"]["id"].as<int>(0);
-                json_response = traitment_loading_datas(choix, id, "", 0, 0, 0, 0, 0);
-        } else if (choix == 3) {
-                string id_capteur = resource["datas"]["sensor_id"].as<std::string>("uknows_sensor");
-                json_response = traitment_loading_datas(choix, 0, id_capteur, 0, 0, 0, 0, 0);
-        } else if (choix == 4) {
-                int day   = resource["datas"]["day"].as<int>(0);
-                int month = resource["datas"]["month"].as<int>(0);
-                int year  = resource["datas"]["year"].as<int>(0);
-                json_response = traitment_loading_datas(choix, 0, "", 0, 0, day, month, year);
-        } else if (choix == 5) {
-                int minute    = resource["datas"]["minute"].as<int>(0);
-                int hour      = resource["datas"]["hour"].as<int>(0);
-                json_response = traitment_loading_datas(choix, 0, "", minute, hour, 0, 0, 0);
-        }
-        return json_response;
+               RSJresource  resource (msg_request); // RSJ parser (delayed parser)
+               int choix = resource["datas"]["choix"].as<int>(0);
+               string json_response = "";
+               if (choix == 1) {
+                       json_response = traitment_loading_datas(choix, 0, "", 0, 0, 0, 0, 0);
+               } else if (choix == 2) {
+                       int id = resource["datas"]["id"].as<int>(0);
+                       json_response = traitment_loading_datas(choix, id, "", 0, 0, 0, 0, 0);
+               } else if (choix == 3) {
+                       string id_capteur = resource["datas"]["sensor_id"].as<std::string>("uknows_sensor");
+                       json_response = traitment_loading_datas(choix, 0, id_capteur, 0, 0, 0, 0, 0);
+               } else if (choix == 4) {
+                       int day   = resource["datas"]["day"].as<int>(0);
+                       int month = resource["datas"]["month"].as<int>(0);
+                       int year  = resource["datas"]["year"].as<int>(0);
+                       json_response = traitment_loading_datas(choix, 0, "", 0, 0, day, month, year);
+               } else if (choix == 5) {
+                       int minute    = resource["datas"]["minute"].as<int>(0);
+                       int hour      = resource["datas"]["hour"].as<int>(0);
+                       json_response = traitment_loading_datas(choix, 0, "", minute, hour, 0, 0, 0);
+               }
+               return json_response;
     }
 }
