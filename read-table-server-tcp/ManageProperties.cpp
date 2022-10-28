@@ -118,6 +118,7 @@ namespace Manage
 
        void ManageProperties::read_contains_properties_file(std::string file_name, const char delimiter)
        {
+              LOG_INIT_CERR();
               try
               {
                      std::ifstream properties(file_name);
