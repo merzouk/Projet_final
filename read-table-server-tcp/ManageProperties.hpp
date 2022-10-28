@@ -31,8 +31,7 @@ namespace Manage
                      void add_new_elt(string key, string value);
                      void tokenize(std::string const &key_value, const char delimiter);
                      void read_contains_properties_file(std::string file_name, const char delimiter);
-
-
+                     int size_map() { return map_properties.size();}
        };
 }
 #endif // PROPERTIER_H_FILE

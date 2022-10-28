@@ -37,19 +37,29 @@ void send_(tcp::socket &socket, const string &message) {
 int main(int argc, char ** argv)
 {
        int port =  atoi(argv[1]);
-       std::string file_name = argv[2];
+       std::string properties_file = argv[2];
 
        if(port == 0)
        {
               cout << "Le numero de port n'est pas renseigne, connexion impossible : " << port << endl;
               return 1;
        }
-
+       if(properties_file.size() == 0)
+	{
+	     cout << "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " << port << endl;
+            return 1;
+	}
        if(port < 0) port *=-1;
        boost::asio::io_service io_service;
 
        ManageProperties * manageProperties = new ManageProperties();
-       manageProperties->read_contains_properties_file(file_name, ':');
+       manageProperties->read_contains_properties_file(properties_file, ':');
+       if(manageProperties->size_map() == 0)
+	{
+	     cout << "Aucun parametre trouve dans le fichier ressources, connexion impossible : " << port << endl;
+            return 1;
+	}
+
        Factory *factory = new Factory(manageProperties);
        while (1)
        {
