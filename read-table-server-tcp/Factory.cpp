@@ -101,9 +101,18 @@ namespace Manage
                std::string json_string = "";
                if (json_string_vect.size() == 0)
                        return json_string;
+               int i = 0;
                for (std::string str : json_string_vect)
                {
-                       json_string += str + "#";
+                       if(i == 0)
+                       {
+                            i++;
+                            json_string += str;
+                       }
+                       else
+                       {
+                            json_string += str + "#";
+                       }
                }
                return json_string;
        }
