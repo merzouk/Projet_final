@@ -117,20 +117,27 @@ namespace Manage
 
        void ManageProperties::read_contains_properties_file(std::string file_name, const char delimiter)
        {
-              std::ifstream properties(file_name);
-              if (properties.is_open())
+              try
               {
-                     std::string line;
-                     while (std::getline(properties, line))
+                     std::ifstream properties(file_name);
+                     if (properties.is_open())
                      {
-                            tokenize(line, delimiter);
+                            std::string line;
+                            while (std::getline(properties, line))
+                            {
+                                   tokenize(line, delimiter);
+                            }
+                            properties.close();
                      }
-                     properties.close();
+                     else
+                     {
+                            cout << "erreur pendant la tentative d'ouverture du fichier : "
+                                          << file_name << endl;
+                     }
               }
-              else
+              catch(exception &ex)
               {
-                     cout << "erreur pendant la tentative d'ouverture du fichier : "
-                                   << file_name << endl;
+                   log(LOG_ERR) << "Erreur durant l'ouverture du fichier :  "+file_name+"  : "+ std::string(ex.what()) + "\n";
               }
        }
 }
