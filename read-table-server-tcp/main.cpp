@@ -98,7 +98,7 @@ int main(int argc, char ** argv)
               }
               catch(exception & ex)
               {
-                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " + ex.what() + "\n";
+                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " + std::string(ex.what()) + "\n";
                      log(LOG_ERR)  << "Server TCP : sent response to client faillures !\n" ;
               }
         }
