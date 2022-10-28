@@ -111,7 +111,7 @@ namespace Manage
                        }
                        else
                        {
-                            json_string += str + "#";
+                            json_string += "#" + str;
                        }
                }
                return json_string;
