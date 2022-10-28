@@ -1,4 +1,5 @@
 #include "ManageProperties.hpp"
+#include "Logger.hpp"
 
 namespace Manage
 {

@@ -1,4 +1,5 @@
 #include "ManageProperties.hpp"
+#include "Logger.hpp"
 
 namespace Manage
 {
@@ -129,7 +130,7 @@ namespace Manage
               }
               catch(exception &ex)
               {
-                   cout  << "Erreur durant l'ouverture du fichier :  " << file_name << "  " <<ex.what() << endl;
+                   log(LOG_ERR) << "Erreur durant l'ouverture du fichier :  "+file_name+"  : "+ std::string(ex.what()) + "\n";
               }
        }
 }
