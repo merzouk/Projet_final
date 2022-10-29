@@ -1,6 +1,12 @@
 
 #include <iostream>
 #include <sqlite3.h>
+#include <string>
+
+#include "Logger.hpp"
+
+#include <chrono> //milliseconds
+#include <thread> //sleep_for
 
 using namespace std;
 
@@ -11,12 +17,14 @@ static int callback(void *NotUsed, int argc, char **argv, char **szColName)
 
 int main(int argc, char **argv)
 {
+        // Initiate logger (default name is 'log')
+        LOG_INIT_CERR();
         sqlite3 *db;
         char *errorMsg = 0;
 
         if(argc < 2)
         {
-                cout <<"Le chemin vers le dossier de la base de donnees est obligatoire" << endl;
+                log(LOG_ERR) <<"Le chemin vers le dossier de la base de donnees est obligatoire\n" ;
                 return 1;
         }
         string path_db = argv[1];
@@ -27,11 +35,11 @@ int main(int argc, char **argv)
 
         if (rc)
         {
-                std::cout << "Can't open database" << endl;
+                log(LOG_ERR) << "Can't open database\n";
         }
         else
         {
-                std::cout << "Open database successfully" << endl;
+                log(LOG_INFO) << "Open database successfully\n";
         }
 
         // prepare our sql statements
@@ -42,8 +50,8 @@ int main(int argc, char **argv)
         rc = sqlite3_exec(db, pSQL, callback, 0, &errorMsg);
         if (rc != SQLITE_OK)
         {
-                std::cout << "Can't create table temp_datas inside database " << endl;
-                std::cout << "SQL Error: " << errorMsg << std::endl;
+                log(LOG_ERR) << "Can't create table temp_datas inside database \n";
+                log(LOG_ERR) << "SQL Error : "  +std::string(errorMsg) + "\n";
                 sqlite3_free(errorMsg);
                 if (db)
                 {
@@ -55,7 +63,7 @@ int main(int argc, char **argv)
         // close database
         if (db)
         {
-                std::cout << "Create temp_datas table successfully" << endl;
+                log(LOG_INFO) << "Create temp_datas table successfully\n";
                 sqlite3_close(db);
         }
 
