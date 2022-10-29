@@ -26,7 +26,7 @@ namespace Manage
 
                 if( error && error != boost::asio::error::eof )
                 {
-                  cout << "receive failed: " << error.message() << endl;
+                  cout << "receive request failed: " << error.message() << endl;
                   return "";
                 }
                 else

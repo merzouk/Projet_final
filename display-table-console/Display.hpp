@@ -1,4 +1,3 @@
-
 #ifndef DISPLAY_H_FILE
 #define DISPLAY_H_FILE
 
