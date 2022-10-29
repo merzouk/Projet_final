@@ -59,8 +59,8 @@ int main(int argc, char ** argv)
        }
        if(properties_file.size() == 0)
 	{
-	    log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
-            return 1;
+           log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
+           return 1;
 	}
        if(port < 0) port *=-1;
        boost::asio::io_service io_service;
@@ -86,15 +86,15 @@ int main(int argc, char ** argv)
 
                 string message_request = read_(socket_);
 
-                cout <<"message request : " << message_request << endl;
+                log(LOG_INFO) << "message request : " + message_request +"\n";
 
                 string message_response = factory->load_message_response(message_request);
 
-                cout << "message response : " << endl << message_response << endl;
+                log(LOG_INFO) << "message response : " +"\n" + message_response +"\n";
 
                 send_(socket_, message_response);
 
-                cout << "Server TCP : sent response to client successfully !" << endl;
+                log(LOG_INFO) << "Server TCP : sent response to client successfully !\n";
               }
               catch(exception & ex)
               {
