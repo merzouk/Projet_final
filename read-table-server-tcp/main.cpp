@@ -94,7 +94,7 @@ int main(int argc, char ** argv)
 
                 send_(socket_, message_response);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "\Server TCP : sent response to client successfully !\n";
+                log(LOG_INFO) << "Server TCP : sent response to client successfully !\n";
               }
               catch(exception & ex)
               {
