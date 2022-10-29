@@ -90,7 +90,7 @@ int main(int argc, char ** argv)
 
                 string message_response = factory->load_message_response(message_request);
 
-                log(LOG_INFO) << "message response : " +"\n" + message_response +"\n";
+                log(LOG_INFO) << "message response : \n" + message_response + "\n";
 
                 send_(socket_, message_response);
 
