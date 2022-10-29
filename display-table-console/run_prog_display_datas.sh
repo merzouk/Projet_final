@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 2 ]; then
         echo "                                Deux parametres sont attendus : "
 	    echo "                                   1) Le numero de port du service Boost::asio sur le server TCP "
 	    echo "                                   2) Le chemin vers le fichier de ressources"
