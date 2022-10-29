@@ -125,8 +125,7 @@ namespace Manage
                      }
                      else
                      {
-                            cout << "erreur pendant la tentative d'ouverture du fichier : "
-                                          << file_name << endl;
+                           log(LOG_ERR) << "Erreur pendant la tentative d'ouverture du fichier : " +file_name +"\n";
                      }
               }
               catch(exception &ex)
