@@ -86,15 +86,15 @@ int main(int argc, char ** argv)
 
                 string message_request = read_(socket_);
 
-                log(LOG_INFO) << "message request : " + message_request +"\n";
+                log(LOG_INFO) << "\nmessage request : " + message_request +"\n";
 
                 string message_response = factory->load_message_response(message_request);
 
-                log(LOG_INFO) << "message response : \n" + message_response + "\n";
+                log(LOG_INFO) << "\nmessage response : \n" + message_response + "\n";
 
                 send_(socket_, message_response);
 
-                log(LOG_INFO) << "Server TCP : sent response to client successfully !\n";
+                log(LOG_INFO) << "\nServer TCP : sent response to client successfully !\n";
               }
               catch(exception & ex)
               {
