@@ -1,8 +1,71 @@
 #include "Factory.hpp"
 #include "Parser.hpp"
 
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+
 namespace Manage
 {
+       std::string get_date(DatasCapteur * data)
+       {
+              return std::to_string(data->get_jour())+"/" +std::to_string(data->get_mois())+"/" +std::to_string(data->get_annee())+" "+std::to_string(data->get_heure())+":"+std::to_string(data->get_minute())+":"+std::to_string(data->get_seconde());
+       }
+
+       std::string build_json(DatasCapteur * data)
+       {
+              std::string str = "{ \"sensor_id\": \""
+                                +data->get_identite_capt()
+                                +"\", \"id\": 0, \"str_date\": \""
+                                +get_date(data)
+                                +"\", \"temperature\": 0,  \"humidity\": 0,  \"pressure\": 0,  \"gyro_x\": 0,  \"gyro_y\": 0, \"gyro_z\": 0,  \"accel_x\": 0, \"accel_y\": 0,  \"accel_z\": 0}";
+              return str;
+       }
+
+       std::string build_json_from_object(DatasCapteur * data)
+       {
+         std::string str1 =  build_json(data); ;
+         const char * json = str1.c_str();
+         Document d;
+         d.Parse(json);
+
+         Value& id = d["id"];
+         id.SetInt(data->get_id());
+
+         Value& temperature= d["temperature"];
+         temperature.SetDouble(data->get_temperature());
+         Value& humidity= d["humidity"];
+         humidity.SetDouble(data->get_humidity());
+         Value& pressure= d["pressure"];
+         pressure.SetDouble(data->get_pressure());
+
+         Value& gyro_x= d["gyro_x"];
+         gyro_x.SetDouble(data->get_gyro_x());
+         Value& gyro_y= d["gyro_y"];
+         gyro_y.SetDouble(data->get_gyro_y());
+         Value& gyro_z= d["gyro_z"];
+         gyro_z.SetDouble(data->get_gyro_z());
+
+         Value& accel_x= d["accel_x"];
+         accel_x.SetDouble(data->get_accel_x());
+         Value& accel_y= d["accel_y"];
+         accel_y.SetDouble(data->get_accel_y());
+         Value& accel_z= d["accel_z"];
+         accel_z.SetDouble(data->get_accel_z());
+
+          // 3. Stringify the DOM
+           StringBuffer buffer;
+           Writer<StringBuffer> writer(buffer);
+           d.Accept(writer);
+
+           // Output {datas:{"project":"Mon Projet","stars":11}}
+           std::string str = buffer.GetString();
+
+            str = "{capteur:"+str+"}";
+
+            return str;
+       }
+
        vector<DatasCapteur *> Factory::load_all_datas()
        {
                 string sql = manageProperties->get_value_by_key("sql_query");
@@ -52,6 +115,7 @@ namespace Manage
                      return json_string_vect;
               for(DatasCapteur * data : vect_datas)
               {
+                     /*
                      string json_str = "{capteur:{ id: "+to_string(data->get_id()) +", ";
                      json_str += "str_date: '"+ to_string(data->get_jour())+"/"+ to_string(data->get_mois())+"/"+ to_string(data->get_annee())+" ";
                      json_str += to_string(data->get_heure())+":"+ to_string(data->get_minute())+":"+ to_string(data->get_seconde())+"', ";
@@ -65,6 +129,9 @@ namespace Manage
                      json_str +=" accel_x: " + to_string(data->get_accel_x())+ ", ";
                      json_str +=" accel_y: " + to_string(data->get_accel_y())+ ", ";
                      json_str +=" accel_z: " + to_string(data->get_accel_z())+ "}}";
+                     json_string_vect.push_back(json_str);
+                     */
+                     std::string json_str = build_json_from_object(DatasCapteur * data);
                      json_string_vect.push_back(json_str);
               }
               return json_string_vect;
