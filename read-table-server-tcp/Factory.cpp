@@ -137,7 +137,7 @@ namespace Manage
                      json_str +=" accel_z: " + to_string(data->get_accel_z())+ "}}";
                      json_string_vect.push_back(json_str);
                      */
-                     std::string json_str = build_json_from_object(DatasCapteur * data);
+                     std::string json_str = build_json_from_object(data);
                      json_string_vect.push_back(json_str);
               }
               return json_string_vect;
