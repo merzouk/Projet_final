@@ -5,6 +5,12 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
+#include <iostream>
+
+#include <string>
+
+using namespace rapidjson;
+
 namespace Manage
 {
        std::string get_date(DatasCapteur * data)
