@@ -64,17 +64,16 @@ namespace Manage
          Value& accel_z= d["accel_z"];
          accel_z.SetDouble(data->get_accel_z());
 
-          // 3. Stringify the DOM
-           StringBuffer buffer;
-           Writer<StringBuffer> writer(buffer);
-           d.Accept(writer);
+         // 3. Stringify the DOM
+         StringBuffer buffer;
+         Writer<StringBuffer> writer(buffer);
+         d.Accept(writer);
 
-           // Output {datas:{"project":"Mon Projet","stars":11}}
-           std::string str = buffer.GetString();
+         std::string str = buffer.GetString();
 
-            str = "{capteur:"+str+"}";
+         str = "{capteur:"+str+"}";
 
-            return str;
+         return str;
        }
 
        vector<DatasCapteur *> Factory::load_all_datas()
