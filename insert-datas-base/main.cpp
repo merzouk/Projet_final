@@ -3,6 +3,7 @@
 
 
 #include "Logger.hpp"
+#include <exception>
 
 #include <chrono> //milliseconds
 #include <thread> //sleep_for
