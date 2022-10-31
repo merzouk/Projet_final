@@ -48,10 +48,6 @@ int main(int argc, char *argv[])
        catch(exception & ex)
        {
             log(LOG_ERR) <<"Erreur pendant l'insertion en base de donnees "+std::string(ex.what()) +"\n";
-            delete jsonTools;
-            jsonTools = nullptr;
-            delete manageProperties;
-            manageProperties = nullptr;
             return 1;
        }
     }
