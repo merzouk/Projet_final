@@ -4,6 +4,15 @@
 #include <string.h>
 #include <iostream>
 
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+
+
+#include <string>
+
+using namespace rapidjson;
+
 using namespace std;
 #include <string>
 
@@ -89,6 +98,69 @@ namespace Datas
                 void set_jour(int jour){  this->jour = jour ; }
                 void set_mois(int mois){  this->mois = mois ; }
                 void set_annee(int annee){  this->annee = annee ; }
+
+              std::string get_date(DatasCapteur * data)
+              {
+                     return std::to_string(data->get_jour())
+                                 +"/" +std::to_string(data->get_mois())
+                                 +"/" +std::to_string(data->get_annee())
+                                 +" " +std::to_string(data->get_heure())
+                                 +":" +std::to_string(data->get_minute())
+                                 +":" +std::to_string(data->get_seconde());
+              }
+
+              std::string build_json(DatasCapteur * data)
+              {
+                     std::string str = "{ \"sensor_id\": \""
+                                       +this->get_identite_capt()
+                                       +"\", \"id\": 0, \"str_date\": \""
+                                       +get_date(data)
+                                       +"\", \"temperature\": 0,  \"humidity\": 0,  \"pressure\": 0,  \"gyro_x\": 0,  \"gyro_y\": 0, \"gyro_z\": 0,  \"accel_x\": 0, \"accel_y\": 0,  \"accel_z\": 0}";
+                     return str;
+              }
+
+              std::string build_json_from_object()
+              {
+                std::string str1 =  build_json(data); ;
+                const char * json = str1.c_str();
+                Document d;
+                d.Parse(json);
+
+                Value& id = d["id"];
+                id.SetInt(this->get_id());
+
+                Value& temperature= d["temperature"];
+                temperature.SetDouble(this->->get_temperature());
+                Value& humidity= d["humidity"];
+                humidity.SetDouble(this->->get_humidity());
+                Value& pressure= d["pressure"];
+                pressure.SetDouble(this->->get_pressure());
+
+                Value& gyro_x= d["gyro_x"];
+                gyro_x.SetDouble(this->->get_gyro_x());
+                Value& gyro_y= d["gyro_y"];
+                gyro_y.SetDouble(this->->get_gyro_y());
+                Value& gyro_z= d["gyro_z"];
+                gyro_z.SetDouble(this->->get_gyro_z());
+
+                Value& accel_x= d["accel_x"];
+                accel_x.SetDouble(this->->get_accel_x());
+                Value& accel_y= d["accel_y"];
+                accel_y.SetDouble(this->->get_accel_y());
+                Value& accel_z= d["accel_z"];
+                accel_z.SetDouble(this->->get_accel_z());
+
+                // 3. Stringify the DOM
+                StringBuffer buffer;
+                Writer<StringBuffer> writer(buffer);
+                d.Accept(writer);
+
+                std::string str = buffer.GetString();
+
+                str = "{capteur:"+str+"}";
+
+                return str;
+              }
        };
 }
 
