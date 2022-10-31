@@ -60,20 +60,16 @@ int main(int argc, char **argv)
                 log(LOG_INFO) << "Open database successfully\n";
         }
 
-
-	 string sql_query_create_table =  manageProperties->get_value_by_key("create_table");
-
-	 cout <<"sql_query_create_table : " << sql_query_create_table << endl;
+	 string sql_query_create_table =  manageProperties->get_value_by_key("request_create_table");
 
         // prepare our sql statements
         const char *pSQL = sql_query_create_table.c_str();
-                        //"CREATE TABLE temp_datas(id INTEGER PRIMARY KEY AUTOINCREMENT, identite_capt varchar(50), temperature FLOAT, humidity FLOAT, pressure FLOAT, gyro_x FLOAT, gyro_y FLOAT, gyro_z FLOAT, accel_x FLOAT, accel_y FLOAT, accel_z FLOAT, seconde SMALLINT, minute SMALLINT, heure SMALLINT, jour SMALLINT, mois SMALLINT, annee SMALLINT)";
 
         // execute sql
         rc = sqlite3_exec(db, pSQL, callback, 0, &errorMsg);
         if (rc != SQLITE_OK)
         {
-                log(LOG_ERR) << "Can't create table temp_datas inside database \n";
+                log(LOG_ERR) << "Can't create table inside database \n";
                 log(LOG_ERR) << "SQL Error : "  +std::string(errorMsg) + "\n";
                 sqlite3_free(errorMsg);
                 if (db)
@@ -86,7 +82,7 @@ int main(int argc, char **argv)
         // close database
         if (db)
         {
-                log(LOG_INFO) << "Create temp_datas table successfully\n";
+                log(LOG_INFO) << "Create table successfully\n";
                 sqlite3_close(db);
         }
 
