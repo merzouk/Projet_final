@@ -7,8 +7,6 @@
 
 namespace Manage
 {
-
-
        vector<DatasCapteur *> Factory::load_all_datas()
        {
                 string sql = manageProperties->get_value_by_key("sql_query");
