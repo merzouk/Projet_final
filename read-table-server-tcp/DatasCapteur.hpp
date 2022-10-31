@@ -99,29 +99,29 @@ namespace Datas
                 void set_mois(int mois){  this->mois = mois ; }
                 void set_annee(int annee){  this->annee = annee ; }
 
-              std::string get_date(DatasCapteur * data)
+              std::string get_date()
               {
-                     return std::to_string(data->get_jour())
-                                 +"/" +std::to_string(data->get_mois())
-                                 +"/" +std::to_string(data->get_annee())
-                                 +" " +std::to_string(data->get_heure())
-                                 +":" +std::to_string(data->get_minute())
-                                 +":" +std::to_string(data->get_seconde());
+                     return std::to_string(this->get_jour())
+                                 +"/" +std::to_string(this->get_mois())
+                                 +"/" +std::to_string(this->get_annee())
+                                 +" " +std::to_string(this->get_heure())
+                                 +":" +std::to_string(this->get_minute())
+                                 +":" +std::to_string(this->get_seconde());
               }
 
-              std::string build_json(DatasCapteur * data)
+              std::string build_json()
               {
                      std::string str = "{ \"sensor_id\": \""
                                        +this->get_identite_capt()
                                        +"\", \"id\": 0, \"str_date\": \""
-                                       +get_date(data)
+                                       +this->get_date()
                                        +"\", \"temperature\": 0,  \"humidity\": 0,  \"pressure\": 0,  \"gyro_x\": 0,  \"gyro_y\": 0, \"gyro_z\": 0,  \"accel_x\": 0, \"accel_y\": 0,  \"accel_z\": 0}";
                      return str;
               }
 
               std::string build_json_from_object()
               {
-                std::string str1 =  build_json(data); ;
+                std::string str1 =  this->build_json(); ;
                 const char * json = str1.c_str();
                 Document d;
                 d.Parse(json);
@@ -144,7 +144,7 @@ namespace Datas
                 gyro_z.SetDouble(this->get_gyro_z());
 
                 Value& accel_x= d["accel_x"];
-                accel_x.SetDouble(this->->get_accel_x());
+                accel_x.SetDouble(this->get_accel_x());
                 Value& accel_y= d["accel_y"];
                 accel_y.SetDouble(this->get_accel_y());
                 Value& accel_z= d["accel_z"];
