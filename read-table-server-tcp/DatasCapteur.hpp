@@ -130,25 +130,25 @@ namespace Datas
                 id.SetInt(this->get_id());
 
                 Value& temperature= d["temperature"];
-                temperature.SetDouble(this->->get_temperature());
+                temperature.SetDouble(this->get_temperature());
                 Value& humidity= d["humidity"];
-                humidity.SetDouble(this->->get_humidity());
+                humidity.SetDouble(this->get_humidity());
                 Value& pressure= d["pressure"];
-                pressure.SetDouble(this->->get_pressure());
+                pressure.SetDouble(this->get_pressure());
 
                 Value& gyro_x= d["gyro_x"];
-                gyro_x.SetDouble(this->->get_gyro_x());
+                gyro_x.SetDouble(this->get_gyro_x());
                 Value& gyro_y= d["gyro_y"];
-                gyro_y.SetDouble(this->->get_gyro_y());
+                gyro_y.SetDouble(this->get_gyro_y());
                 Value& gyro_z= d["gyro_z"];
-                gyro_z.SetDouble(this->->get_gyro_z());
+                gyro_z.SetDouble(this->get_gyro_z());
 
                 Value& accel_x= d["accel_x"];
                 accel_x.SetDouble(this->->get_accel_x());
                 Value& accel_y= d["accel_y"];
-                accel_y.SetDouble(this->->get_accel_y());
+                accel_y.SetDouble(this->get_accel_y());
                 Value& accel_z= d["accel_z"];
-                accel_z.SetDouble(this->->get_accel_z());
+                accel_z.SetDouble(this->get_accel_z());
 
                 // 3. Stringify the DOM
                 StringBuffer buffer;
