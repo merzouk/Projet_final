@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
     LOG_INIT_CERR();
     if(argc == 3)
     {
+       try
+       {
        string path_to_json_file = argv[1];
        string properties_file = argv[2];
        if(properties_file.size() == 0)
@@ -38,6 +40,19 @@ int main(int argc, char *argv[])
        int res = jsonTools->build_Object_from_json_save(path_to_json_file, path_data_base);
        delete jsonTools;
        jsonTools = nullptr;
+       delete manageProperties;
+       manageProperties = nullptr;
+       log(LOG_INFO) << "Insertion en base de donnees s'est achevee avec succes\n" ;
+       }
+       catch(exception & ex)
+       {
+            log(LOG_ERR) <<"Erreur pendant l'insertion en base de donnees "+std::string(ex.what()) +"\n";
+            delete jsonTools;
+            jsonTools = nullptr;
+            delete manageProperties;
+            manageProperties = nullptr;
+            return 1;
+       }
     }
     else
     {
