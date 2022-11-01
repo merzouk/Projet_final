@@ -8,7 +8,7 @@ qu'elle affcihe sur la console, en fonction des critères choisis par l'opérate
 
 ## Example de données affichées par la console
 
-![My Image](../pictures/display_datas.png)
+![My Image](../pictures/display_datas.jpg)
 
 
 
