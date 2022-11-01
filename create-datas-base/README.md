@@ -20,7 +20,7 @@ vers la base de données ainsi que la requête de création de la table.
 ```
 
 ```
-url_data_base:
+url_data_base
 request_create_table
 ```
 
