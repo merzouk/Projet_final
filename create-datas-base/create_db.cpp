@@ -11,6 +11,7 @@
 
 using namespace std;
 using namespace Manage;
+using namespace ManageLog;
 
 static int callback(void *NotUsed, int argc, char **argv, char **szColName)
 {

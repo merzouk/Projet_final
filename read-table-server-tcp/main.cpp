@@ -24,6 +24,7 @@ using std::endl;
 #include <thread> //sleep_for
 
 using namespace Manage;
+using namespace ManageLog;
 
 string read_(tcp::socket &socket) {
         boost::asio::streambuf buf;

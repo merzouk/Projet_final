@@ -8,8 +8,10 @@
 #include <regex>
 
 
-using namespace Manage;
 
+
+using namespace Manage;
+using namespace ManageLog;
 
 bool validate_ip_address(const std::string& ip_address)
 {

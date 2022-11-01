@@ -11,6 +11,7 @@
 
 
 using namespace Manage;
+using namespace ManageLog;
 
 int main(int argc, char *argv[])
 {
