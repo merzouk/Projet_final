@@ -172,7 +172,7 @@ namespace ManageLog
          if (t->tm_mon + 1 < 10) M = "0" + M;
 
          std::string ret =
-             "[ " + Y + "-" + M + "-" + D + "T" + h + ":" + m + ":" + s + " ]";
+             "[ " + Y + "/" + M + "/" + D + "  " + h + ":" + m + ":" + s + " ]";
 
          return ret;
        }
