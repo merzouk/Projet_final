@@ -52,40 +52,42 @@ namespace ManageLog
 
        class logger
        {
-        public:
-         inline logger(std::ostream&, unsigned, std::string);
-         inline logger(std::ostream&, std::string n);
-         template <typename T>
-         friend logger& operator<<(logger& l, const T& s);
-         inline logger& operator()(unsigned ll);
-         inline void add_snapshot(std::string n, bool quiet = true) {
-           time_t now;
-           time(&now);
-           _snaps.push_back(now);
-           _snap_ns.push_back(n);
-           if (_loglevel() >= LOG_TIME && !quiet)
-             _fac << BSLOG_TIME << prep_time(*this) << prep_name(*this)
-                  << ": Added snap '" << n << "'\n";
-         }
+          private:
+                time_t now;
+                time_t start;
+                std::vector<time_t> snaps;
+                std::vector<std::string> snap_ns;
+                unsigned message_level;
+                std::ostream& fac;
+                std::string name;
 
-         inline void flush() { _fac.flush(); }
-         friend std::string prep_level(logger& l);
-         friend std::string prep_time(logger& l);
-         friend std::string prep_name(logger& l);
-         static unsigned& _loglevel() {
-           static unsigned _ll_internal = LOG_DEFAULT;
-           return _ll_internal;
-         };
-         inline void set_log_level(unsigned ll) { _loglevel() = ll; }
+          public:
+                inline logger(std::ostream&, unsigned, std::string);
+                inline logger(std::ostream&, std::string n);
+                template <typename T>
+                friend logger& operator<<(logger& l, const T& s);
+                inline logger& operator()(unsigned ll);
+                inline void add_snapshot(std::string n, bool quiet = true)
+                {
+                  time_t now;
+                  time(&now);
+                  snaps.push_back(now);
+                  snap_ns.push_back(n);
+                  if (_loglevel() >= LOG_TIME && !quiet)
+                    fac << BSLOG_TIME << prep_time(*this) << prep_name(*this)
+                         << ": Added snap '" << n << "'\n";
+                }
 
-        private:
-         time_t _now;
-         time_t _start;
-         std::vector<time_t> _snaps;
-         std::vector<std::string> _snap_ns;
-         unsigned _message_level;
-         std::ostream& _fac;
-         std::string _name;
+                inline void flush() { fac.flush(); }
+                friend std::string prep_level(logger& l);
+                friend std::string prep_time(logger& l);
+                friend std::string prep_name(logger& l);
+                static unsigned& _loglevel()
+                {
+                  static unsigned _ll_internal = LOG_DEFAULT;
+                  return _ll_internal;
+                };
+                inline void set_log_level(unsigned ll) { _loglevel() = ll; }
        };
 
        inline std::string prep_level(logger& l);
@@ -95,41 +97,47 @@ namespace ManageLog
        // unsigned logger::_loglevel = LOG_DEFAULT;
 
        template <typename T>
-       logger& operator<<(logger& l, const T& s) {
-         if (l._message_level <= l._loglevel()) {
-           l._fac << s;
+       logger& operator<<(logger& l, const T& s)
+       {
+         if (l.message_level <= l._loglevel())
+         {
+           l.fac << s;
            return l;
-         } else {
+         }
+         else
+         {
            return l;
          }
        }
 
        logger::logger(std::ostream& f, std::string n)
-           : _message_level(LOG_SILENT), _fac(f), _name(n) {
-         time(&_now);
-         time(&_start);
+           : message_level(LOG_SILENT), fac(f), name(n)
+       {
+         time(&now);
+         time(&start);
        }
 
        logger::logger(std::ostream& f, unsigned ll, std::string n)
-           : _message_level(LOG_SILENT), _fac(f), _name(n) {
-         time(&_now);
-         time(&_start);
+           : message_level(LOG_SILENT), fac(f), name(n)
+       {
+         time(&now);
+         time(&start);
          _loglevel() = ll;
        }
 
        logger& logger::operator()(unsigned ll)
        {
-         _message_level = ll;
-         if (_message_level <= _loglevel())
+         message_level = ll;
+         if (message_level <= _loglevel())
          {
-           _fac << prep_level(*this) << prep_time(*this) << prep_name(*this) << ": ";
+           fac << prep_level(*this) << prep_time(*this) << prep_name(*this) << ": ";
          }
          return *this;
        }
 
        std::string prep_level(logger& l)
        {
-         switch (l._message_level)
+         switch (l.message_level)
          {
            case LOG_ERR:
              return BSLOG_ERROR;
@@ -154,9 +162,9 @@ namespace ManageLog
 
        std::string prep_time(logger& l)
        {
-         time(&l._now);
+         time(&l.now);
          struct tm* t;
-         t = localtime(&l._now);
+         t = localtime(&l.now);
          std::string s, m, h, D, M, Y;
          s = std::to_string(t->tm_sec);
          m = std::to_string(t->tm_min);
@@ -177,7 +185,10 @@ namespace ManageLog
          return ret;
        }
 
-       std::string prep_name(logger& l) { return "[ " + l._name + " ]"; }
+       std::string prep_name(logger& l)
+       {
+              return "[ " + l.name + " ]";
+       }
 }
 
 #endif // LOGGER_H_FILE
