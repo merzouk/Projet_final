@@ -9,3 +9,7 @@ d'insertion de données. Le contenu du fichier est inséré en base de données,
 et le fichier est déplacé dans le dossier success si les données sont correctement formatées, 
 dans le cas contraire, le fichier est déplacé dans le dossier faillures.
 ```
+
+## Example de données au json traitées par le programme d'insertion en base de données
+
+![My Image](../pictures/exemple_donnees_json.jpg)
