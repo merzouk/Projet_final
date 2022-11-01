@@ -10,6 +10,6 @@ et le fichier est déplacé dans le dossier success si les données sont correct
 dans le cas contraire, le fichier est déplacé dans le dossier faillures.
 ```
 
-## Example de données au json traitées par le programme d'insertion en base de données
+## Example de données au format json traitées par le programme d'insertion en base de données
 
 ![My Image](../pictures/exemple_donnees_json.jpg)
