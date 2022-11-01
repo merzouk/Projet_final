@@ -69,13 +69,13 @@ namespace ManageLog
                 inline logger& operator()(unsigned ll);
                 inline void add_snapshot(std::string n, bool quiet = true)
                 {
-                  time_t now;
-                  time(&now);
-                  snaps.push_back(now);
-                  snap_ns.push_back(n);
-                  if (_loglevel() >= LOG_TIME && !quiet)
-                    fac << BSLOG_TIME << prep_time(*this) << prep_name(*this)
-                         << ": Added snap '" << n << "'\n";
+                         time_t now;
+                         time(&now);
+                         snaps.push_back(now);
+                         snap_ns.push_back(n);
+                         if (_loglevel() >= LOG_TIME && !quiet)
+                           fac << BSLOG_TIME << prep_time(*this) << prep_name(*this)
+                                << ": Added snap '" << n << "'\n";
                 }
 
                 inline void flush() { fac.flush(); }
@@ -84,10 +84,13 @@ namespace ManageLog
                 friend std::string prep_name(logger& l);
                 static unsigned& _loglevel()
                 {
-                  static unsigned _ll_internal = LOG_DEFAULT;
-                  return _ll_internal;
+                         static unsigned _ll_internal = LOG_DEFAULT;
+                         return _ll_internal;
                 };
-                inline void set_log_level(unsigned ll) { _loglevel() = ll; }
+                inline void set_log_level(unsigned ll)
+                {
+                       _loglevel() = ll;
+                }
        };
 
        inline std::string prep_level(logger& l);
@@ -99,90 +102,90 @@ namespace ManageLog
        template <typename T>
        logger& operator<<(logger& l, const T& s)
        {
-         if (l.message_level <= l._loglevel())
-         {
-           l.fac << s;
-           return l;
-         }
-         else
-         {
-           return l;
-         }
+                if (l.message_level <= l._loglevel())
+                {
+                  l.fac << s;
+                  return l;
+                }
+                else
+                {
+                  return l;
+                }
        }
 
        logger::logger(std::ostream& f, std::string n)
            : message_level(LOG_SILENT), fac(f), name(n)
        {
-         time(&now);
-         time(&start);
+                time(&now);
+                time(&start);
        }
 
        logger::logger(std::ostream& f, unsigned ll, std::string n)
            : message_level(LOG_SILENT), fac(f), name(n)
        {
-         time(&now);
-         time(&start);
-         _loglevel() = ll;
+                time(&now);
+                time(&start);
+                _loglevel() = ll;
        }
 
        logger& logger::operator()(unsigned ll)
        {
-         message_level = ll;
-         if (message_level <= _loglevel())
-         {
-           fac << prep_level(*this) << prep_time(*this) << prep_name(*this) << ": ";
-         }
-         return *this;
+                message_level = ll;
+                if (message_level <= _loglevel())
+                {
+                  fac << prep_level(*this) << prep_time(*this) << prep_name(*this) << ": ";
+                }
+                return *this;
        }
 
        std::string prep_level(logger& l)
        {
-         switch (l.message_level)
-         {
-           case LOG_ERR:
-             return BSLOG_ERROR;
-             break;
-           case LOG_WARN:
-             return BSLOG_WARNING;
-             break;
-           case LOG_INFO:
-             return BSLOG_INFO;
-             break;
-           case LOG_DEBUG:
-             return BSLOG_DEBUG;
-             break;
-           case LOG_TIME:
-             return BSLOG_TIME;
-             break;
-           default:
-             return "";
-         }
-         return "";
+                switch (l.message_level)
+                {
+                  case LOG_ERR:
+                    return BSLOG_ERROR;
+                    break;
+                  case LOG_WARN:
+                    return BSLOG_WARNING;
+                    break;
+                  case LOG_INFO:
+                    return BSLOG_INFO;
+                    break;
+                  case LOG_DEBUG:
+                    return BSLOG_DEBUG;
+                    break;
+                  case LOG_TIME:
+                    return BSLOG_TIME;
+                    break;
+                  default:
+                    return "";
+                }
+                return "";
        }
 
        std::string prep_time(logger& l)
        {
-         time(&l.now);
-         struct tm* t;
-         t = localtime(&l.now);
-         std::string s, m, h, D, M, Y;
-         s = std::to_string(t->tm_sec);
-         m = std::to_string(t->tm_min);
-         h = std::to_string(t->tm_hour);
-         D = std::to_string(t->tm_mday);
-         M = std::to_string(t->tm_mon + 1);
-         Y = std::to_string(t->tm_year + 1900);
+                time(&l.now);
+                struct tm* t;
+                t = localtime(&l.now);
+                std::string s, m, h, D, M, Y;
+                s = std::to_string(t->tm_sec);
+                m = std::to_string(t->tm_min);
+                h = std::to_string(t->tm_hour);
+                D = std::to_string(t->tm_mday);
+                M = std::to_string(t->tm_mon + 1);
+                Y = std::to_string(t->tm_year + 1900);
 
-         if (t->tm_sec < 10) s = "0" + s;
-         if (t->tm_min < 10) m = "0" + m;
-         if (t->tm_hour < 10) h = "0" + h;
-         if (t->tm_mday < 10) D = "0" + D;
-         if (t->tm_mon + 1 < 10) M = "0" + M;
+                if (t->tm_sec < 10) s = "0" + s;
+                if (t->tm_min < 10) m = "0" + m;
+                if (t->tm_hour < 10) h = "0" + h;
+                if (t->tm_mday < 10) D = "0" + D;
+                if (t->tm_mon + 1 < 10) M = "0" + M;
 
-         std::string ret =
-             "[ " + Y + "/" + M + "/" + D + "  " + h + ":" + m + ":" + s + " ]";
+                std::string ret =
+                    "[ " + Y + "/" + M + "/" + D + "  " + h + ":" + m + ":" + s + " ]";
 
-         return ret;
+                return ret;
        }
 
        std::string prep_name(logger& l)
