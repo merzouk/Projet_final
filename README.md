@@ -206,3 +206,30 @@ De cette façon, le programme d'insertion en base, s'execute une fois toute les 
 
 ![My Image](./pictures/diagramme_general.jpg)
 
+# Détails de la partie présentée dans cette page :
+
+```
+1)	Cette partie traite les données au format json que la Raspberry Maître dépose de façon périodique, 
+un script shell activé par un job crontab, chaque 2 minute lance un programme écrit en c++ de traitement 
+des données déposées. Le contenu du fichier est inséré en base de données, et le fichier est déplacé 
+dans le dossier success si les données sont correctement formatées, dans le cas contraire, 
+le fichier est déplacé dans le dossier faillures.
+```
+
+```
+2)	Sur le serveur TCP, un service Boost développé en C++ exposant des méthodes de lecture de données, 
+c’est une interface de service indépendante qui interroge un programme écrit en C++, qui li dans la base de données.
+```
+
+```
+3)	A distance une application console écrite en C++ est mise à disposition des consultants.
+```
+
+```
+4)	Elle permet de consulter les données selon les critères que le consultant choisi, 
+cette application consomme les services d’un client Boost indépendant écrit en C++, 
+c’est une autre interface, qui interroge le service Boost installé sur le server TCP, 
+les données échangées entre le client et le service c'est-à-dire request et response sont au format json.
+```
+
+
