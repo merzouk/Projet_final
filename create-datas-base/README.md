@@ -12,7 +12,7 @@ vers la base de données ainsi que la requête de création de la table.
 Le programme est indépendant de la base et du contenu de la requête.
 ```
 
-## LEs valeurs lues dans le fichier properties :
+## Les valeurs lues dans le fichier properties :
 
 ```
 Au démarrage, le programme lis le fichier ressources pour obtenir le chemin
