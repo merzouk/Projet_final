@@ -218,7 +218,8 @@ le fichier est déplacé dans le dossier faillures.
 
 ```
 2)	Sur le serveur TCP, un service Boost développé en C++ exposant des méthodes de lecture de données, 
-c’est une interface de service indépendante qui interroge un programme écrit en C++, qui li dans la base de données.
+c’est une interface de service indépendante qui interroge un programme écrit en C++, qui li 
+dans la base de données.
 ```
 
 ```
