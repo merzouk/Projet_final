@@ -233,14 +233,16 @@ c’est une autre interface, qui interroge le service Boost installé sur le ser
 les données échangées entre le client et le service c'est-à-dire request et response sont au format json.
 ```
 
-3 Construire les exécutables :
+# Construire les exécutables :
 
 ```
-Chaque partie est indépendante des autres, chacune compte un makefile, permettant le build et le clean
+Chaque partie est indépendante des autres, elle fonctionne indépendamment des autres. 
+chacune compte un makefile, permettant le build et le clean.
+La partie display interroge via boost asio la partie de lecture en base de données. 
 ```
 
 ```
-make build : construire l'exécutable
+**make build** : construire l'exécutable
 ```
 
 ```
