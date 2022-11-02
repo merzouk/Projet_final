@@ -233,4 +233,22 @@ c’est une autre interface, qui interroge le service Boost installé sur le ser
 les données échangées entre le client et le service c'est-à-dire request et response sont au format json.
 ```
 
+3 Construire les exécutables :
+
+```
+Chaque partie est indépendante des autres, chacune compte un makefile, permettant le build et le clean
+```
+
+```
+make build : construire l'exécutable
+```
+
+```
+make zip : regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+```
+
+```
+make clean : supprimer les fichiers *.o, l'exécutable le zip
+```
+
 
