@@ -242,15 +242,15 @@ La partie display interroge via boost asio la partie de lecture en base de donn�
 ```
 
 ```
-*make build* : construire l'exécutable
+Construire l'exécutable : 
 ```
-
+**make build** 
 ```
-make zip : regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
 ```
-
+**make zip**
 ```
-make clean : supprimer les fichiers *.o, l'exécutable le zip
+Supprimer les fichiers *.o, l'exécutable le zip
 ```
-
+**make clean**
 
