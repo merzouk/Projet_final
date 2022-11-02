@@ -1,5 +1,6 @@
 #include "ManageProperties.hpp"
 #include "Logger.hpp"
+using namespace ManageLog;
 
 namespace Manage
 {

@@ -1,46 +1,27 @@
 #Manage cpp project by Makefile
 
-OS=linux
+CLEAN = rm -rf *.o
+PROG = client
+CLEAN_EXEC=rm $(PROG)
 
-CC = g++  -L/usr/include -g -Wall -ansi -pedantic -lsqlite3
-
-PROG=manage_console
 ARCHIVE=sortie.zip
 TARGET_ARCHIVE=*.cpp *.hpp Makefile
+ZIP=tar -cvzf $(ARCHIVE) $(TARGET_ARCHIVE)
+CLEAN_ZIP=rm $(ARCHIVE)
 
-ifeq ($(OS), linux)
-	DELETE=rm -rf $(PROG) $(ARCHIVE)
-	ZIP=tar -cvzf $(ARCHIVE) $(TARGET_ARCHIVE)
-	CLEAN=rm -rf *.o
-else
-	DELETE=del $(PROG) $(ARCHIVE)
-endif
+CC = g++ -L /usr/lib/ -L/usr/include  -o $(PROG) *.cpp   
+BOOST = -lboost_system -lboost_thread
+SQLITE = -lpthread -lsqlite3
 
-#Identifier tous les fichiers .cpp de mon programme
-SRC = $(wildcard *.cpp)
 
-#Créer une liste des fichiers .o liés aux fichiers .cpp
-OBJ = $(SRC:.cpp=.o)
-
-all: $(PROG)
-
-$(PROG): $(OBJ)
+build: 
 	@echo "Fin build des fichiers .o et generation du fichier executable ==> \"$(PROG)\" : "
-	$(CC) -o $@  $^
-
-%.o : %.c
-	$(CC) -o $@ -c $<
+	$(CC) $(BOOST) $(SQLITE)
 
 clean:
-	@echo "Suppresion des fichiers .o : "
-	$(CLEAN)
-
-mrproper: clean
-	@echo "Suppresion du programme executable \"$(PROG)\" et du fichier archive \"$(ARCHIVE)\" : "
-	$(DELETE)
+	@echo "Suppresion des fichiers .o et de l'executable : "
+	$(CLEAN) $(CLEAN_EXEC) $(CLEAN_ZIP)
 
 zip:
 	@echo "Generation du fichier archive \"$(ARCHIVE)\" : "
 	$(ZIP)
-
-#g++ -L/usr/include -o "create"  *.cpp  -lsqlite3

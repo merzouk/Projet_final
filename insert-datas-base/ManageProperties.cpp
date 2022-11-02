@@ -1,6 +1,8 @@
 #include "ManageProperties.hpp"
 #include "Logger.hpp"
 
+using namespace ManageLog;
+
 namespace Manage
 {
        string ManageProperties::get_value_by_key(string key)
