@@ -27,21 +27,21 @@ int main(int argc, char **argv)
 
         if(argc < 2)
         {
-                log(LOG_ERR) <<"Le chemin vers le fichier ressources est obligatoire\n";
+                log(LOG_ERR) << "Le chemin vers le fichier ressources est obligatoire\n";
                 return 1;
         }
 
         string properties_file = argv[1];
         if(properties_file.size() == 0)
 	 {
-                log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
+                log(LOG_ERR)  << "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
                 return 1;
 	 }
 	 ManageProperties * manageProperties = new ManageProperties();
         manageProperties->read_contains_properties_file(properties_file, ':');
         if(manageProperties->size_map() == 0)
         {
-                log(LOG_ERR)  <<   "Aucun parametre trouve dans le fichier ressources, connexion impossible\n";
+                log(LOG_ERR)  << "Aucun parametre trouve dans le fichier ressources, connexion impossible\n";
                 return 1;
 	 }
 

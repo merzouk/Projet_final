@@ -34,20 +34,17 @@ namespace ManageLog
 
        #ifdef BSLOG_NO_COLORS
 
-              #define BSLOG_TIME "[ TIME    ]"
-              #define BSLOG_DEBUG "[ DEBUG   ]"
-              #define BSLOG_ERROR "[ ERROR   ]"
+              #define BSLOG_TIME    "[ TIME    ]"
+              #define BSLOG_DEBUG   "[ DEBUG   ]"
+              #define BSLOG_ERROR   "[ ERROR   ]"
               #define BSLOG_WARNING "[ WARNING ]"
-              #define BSLOG_INFO "[ INFO    ]"
-
+              #define BSLOG_INFO    "[ INFO    ]"
        #else
-
-              #define BSLOG_TIME "\033[0;35m[ TIME    ]\033[0;0m"
-              #define BSLOG_DEBUG "[ DEBUG   ]"
-              #define BSLOG_ERROR "\033[0;31m[ ERROR   ]\033[0;0m"
+              #define BSLOG_TIME    "\033[0;35m[ TIME    ]\033[0;0m"
+              #define BSLOG_DEBUG             "[ DEBUG   ]"
+              #define BSLOG_ERROR   "\033[0;31m[ ERROR   ]\033[0;0m"
               #define BSLOG_WARNING "\033[0;33m[ WARNING ]\033[0;0m"
-              #define BSLOG_INFO "\033[0;34m[ INFO    ]\033[0;0m"
-
+              #define BSLOG_INFO    "\033[0;34m[ INFO    ]\033[0;0m"
        #endif
 
        class Logger
@@ -77,11 +74,12 @@ namespace ManageLog
                     fac << BSLOG_TIME << prepare_time(*this) << prepare_name(*this)
                          << ": Added snap '" << n << "'\n";
                 }
-
                 inline void flush() { fac.flush(); }
+
                 friend std::string prepare_level(Logger& logger);
                 friend std::string prepare_time(Logger& logger);
                 friend std::string prepare_name(Logger& logger);
+
                 static unsigned& get_log_level()
                 {
                   static unsigned log_level_internal = LOG_DEFAULT;
