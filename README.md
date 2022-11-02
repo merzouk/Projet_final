@@ -242,7 +242,7 @@ La partie display interroge via boost asio la partie de lecture en base de donn�
 ```
 
 ```
-**make build** : construire l'exécutable
+*make build* : construire l'exécutable
 ```
 
 ```
