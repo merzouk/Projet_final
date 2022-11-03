@@ -24,4 +24,8 @@ Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
 Supprimer les fichiers *.o, l'exécutable le zip
 ```
 **make clean**
+```
+Lancer l'exécutable
+```
+**make port_value ../values.properties**
 
