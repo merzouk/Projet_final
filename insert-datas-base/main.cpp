@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
                      string properties_file = argv[2];
                      if(properties_file.size() == 0)
                      {
-                            log(LOG_ERR) << "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible :\n";
+                            log(LOG_ERR) << "Le fichier ressources \"" << properties_file << "\"n'est pas renseigne, parametres manquants, connexion impossible :\n";
                             return 1;
                      }
                      ManageProperties * manageProperties = new ManageProperties();
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
               }
               catch(exception & ex)
               {
-                   log(LOG_ERR) << "Erreur pendant l'insertion en base de donnees " << std::string(ex.what())  << "\n";
+                   log(LOG_ERR) << "Erreur pendant l'insertion en base de donnees " << ex.what()  << "\n";
                    return 1;
               }
     }

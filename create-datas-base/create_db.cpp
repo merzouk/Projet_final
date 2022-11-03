@@ -34,7 +34,7 @@ int main(int argc, char **argv)
         string properties_file = argv[1];
         if(properties_file.size() == 0)
 	 {
-                log(LOG_ERR)  << "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " << properties_file << "\n" ;
+                log(LOG_ERR)  << "Le fichier ressources \"" << properties_file << "\" n'est pas renseigne, parametres manquants, connexion impossible"  << "\n" ;
                 return 1;
 	 }
 	 ManageProperties * manageProperties = new ManageProperties();
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         if (rc != SQLITE_OK)
         {
                 log(LOG_ERR) << "Can't create table inside database \n";
-                log(LOG_ERR) << "SQL Error : "  +std::string(errorMsg) + "\n";
+                log(LOG_ERR) << "SQL Error :  " << errorMsg  << "\n";
                 sqlite3_free(errorMsg);
                 if (db)
                 {

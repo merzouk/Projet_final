@@ -37,7 +37,7 @@ int main(int argc, char ** argv)
        }
        catch(std::exception const & ex)
        {
-            log(LOG_ERR)  << "Le numero de port est au format entier : " << argv[1] << std::string(ex.what()) << "\nconnexion impossible\n";
+            log(LOG_ERR)  << "Le numero de port est au format entier : " << argv[1] << ex.what() << "\nconnexion impossible\n";
             return 1;
        }
 	string ip_address = argv[2];
