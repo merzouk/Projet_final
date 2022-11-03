@@ -45,4 +45,9 @@ Supprimer les fichiers *.o, l'exécutable le zip
 ```
 **make clean**
 
+```
+Lancer l'exécutable
+```
+**./create_db ../values.properties**
+
 
