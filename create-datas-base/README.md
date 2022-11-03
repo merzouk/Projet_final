@@ -30,4 +30,19 @@ request_create_table
 Pour plus d'informations, veuillez consulter le fichier values.properties à la racine.
 ```
 
+# Construire les exécutables :
+
+```
+Construire l'exécutable : 
+```
+**make build** 
+```
+Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+```
+**make zip**
+```
+Supprimer les fichiers *.o, l'exécutable le zip
+```
+**make clean**
+
 
