@@ -3,7 +3,7 @@
 if [ "$#" -ne 2 ]; then
            echo "                                Deux parametres sont attendus : "
 	    echo "                                   1) Le numero de port du service Boost::asio sur le server TCP "
-	    echo "                                   2) Le chemin vers le fichier de ressources"
+	    echo "                                   2) L'addresse ip du server est obligatoire"
 	    exit 1
 fi
 
