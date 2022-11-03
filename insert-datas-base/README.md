@@ -28,3 +28,7 @@ Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
 Supprimer les fichiers *.o, l'exécutable le zip
 ```
 **make clean**
+
+```
+Le script de lancement de l'exécutable est activé par un job de crontab
+```
