@@ -254,3 +254,7 @@ Supprimer les fichiers *.o, l'exécutable le zip
 ```
 **make clean**
 
+```
+rendre les scripts shell exécutable
+```
+**chmod +x file_script_shell.sh**
