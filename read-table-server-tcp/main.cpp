@@ -50,17 +50,28 @@ int main(int argc, char ** argv)
             log(LOG_ERR)  << "Entree du programme attend trois arguments exec, port et et path vers le fichier de resources\n";
             return 1;
        }
-       int port =  atoi(argv[1]);
+
+       int port =  0;
+       try
+       {
+              port = atoi(argv[1]);
+       }
+       catch(std::exception const & ex)
+       {
+            log(LOG_ERR)  << "Le numero de port est au format entier : " << argv[1] << std::string(ex.what()) << "\nconnexion impossible\n";
+            return 1;
+       }
+
        std::string properties_file = argv[2];
 
        if(port == 0)
        {
-              log(LOG_ERR)  <<  "Le numero de port n'est pas renseigne, connexion impossible : " << port << "\n" ;
+              log(LOG_ERR)  <<  "Le numero de port \"" << argv[1] <<"\" n'est pas renseigne, connexion impossible" << "\n" ;
               return 1;
        }
        if(properties_file.size() == 0)
 	{
-           log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " << properties_file << "\n" ;
+           log(LOG_ERR)  <<  "Le fichier ressources \"" << properties_file <<"\"n'est pas renseigne, parametres manquants, connexion impossible : "  << "\n" ;
            return 1;
 	}
        if(port < 0) port *=-1;
