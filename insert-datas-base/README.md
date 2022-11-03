@@ -13,3 +13,18 @@ dans le cas contraire, le fichier est déplacé dans le dossier faillures.
 ## Exemple de données au format json traitées par le programme d'insertion en base
 
 ![My Image](../pictures/exemple_donnees_json.jpg)
+
+# Construire les exécutables :
+
+```
+Construire l'exécutable : 
+```
+**make build** 
+```
+Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+```
+**make zip**
+```
+Supprimer les fichiers *.o, l'exécutable le zip
+```
+**make clean**
