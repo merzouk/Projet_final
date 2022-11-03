@@ -8,3 +8,18 @@ c’est une interface de service indépendante qui interroge un programme écrit
 ## Exemple de données sauvées en base de données
 
 ![My Image](../pictures/exemple_donnees_sauvees_en_base.jpg)
+
+# Construire les exécutables :
+
+```
+Construire l'exécutable : 
+```
+**make build** 
+```
+Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+```
+**make zip**
+```
+Supprimer les fichiers *.o, l'exécutable le zip
+```
+**make clean**
