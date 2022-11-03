@@ -35,20 +35,20 @@ int main(int argc, char ** argv)
 
 	if(port == 0)
        {
-              log(LOG_ERR)  << "Le numero de port n'est pas renseigne, connexion impossible : " + std::to_string(port) + "\n";
+              log(LOG_ERR)  << "Le numero de port n'est pas renseigne, connexion impossible : " << port  << "\n";
               return 1;
        }
        if(port < 0) port *=-1;
 
        if(ip_address.size() == 0)
        {
-              log(LOG_ERR)  << "L'addresse ip du server non renseigne, connexion impossible : " + ip_address + "\n";
+              log(LOG_ERR)  << "L'addresse ip du server non renseigne, connexion impossible : " << ip_address << "\n";
               return 1;
        }
 
        if(validate_ip_address(ip_address) == 0)
        {
-              log(LOG_ERR)  << "Le format de l'addresse ip du server n'est pas correcte, connexion impossible : " + ip_address + "\n";
+              log(LOG_ERR)  << "Le format de l'addresse ip du server n'est pas correcte, connexion impossible : " << ip_address << "\n";
               return 1;
        }
 

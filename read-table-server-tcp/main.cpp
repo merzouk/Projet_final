@@ -55,12 +55,12 @@ int main(int argc, char ** argv)
 
        if(port == 0)
        {
-              log(LOG_ERR)  <<  "Le numero de port n'est pas renseigne, connexion impossible : " +std::to_string(port) + "\n" ;
+              log(LOG_ERR)  <<  "Le numero de port n'est pas renseigne, connexion impossible : " << port << "\n" ;
               return 1;
        }
        if(properties_file.size() == 0)
 	{
-           log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " + properties_file + "\n" ;
+           log(LOG_ERR)  <<  "Le fichier ressources n'est pas renseigne, parametres manquants, connexion impossible : " << properties_file << "\n" ;
            return 1;
 	}
        if(port < 0) port *=-1;
@@ -87,11 +87,11 @@ int main(int argc, char ** argv)
 
                 string message_request = read_(socket_);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "message request : " + message_request +"\n";
+                log(LOG_INFO) << "message request : " << message_request << "\n";
 
                 string message_response = factory->load_message_response(message_request);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "message response : \n" + message_response + "\n";
+                log(LOG_INFO) << "message response : \n" << message_response << "\n";
 
                 send_(socket_, message_response);
                 std::cout << std::endl << std::endl;
@@ -99,7 +99,7 @@ int main(int argc, char ** argv)
               }
               catch(exception & ex)
               {
-                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " + std::string(ex.what()) + "\n";
+                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " << std::string(ex.what()) << "\n";
                      log(LOG_ERR)  << "Server TCP : sent response to client faillures !\n" ;
               }
         }
