@@ -14,7 +14,7 @@ SQLITE = -lpthread -lsqlite3
 
 
 build:
-	@echo "Fin build des fichiers .o et generation du fichier executable ==> \"$(PROG)\" : "
+	@echo "Début du build et generation du fichier executable ==> \"$(PROG)\" : "
 	$(CC) $(SQLITE)
 
 clean:
