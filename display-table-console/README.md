@@ -27,5 +27,5 @@ Supprimer les fichiers *.o, l'exécutable le zip
 ```
 Lancer l'exécutable
 ```
-**make port_value ../values.properties**
+**../run_prog_display_datas.sh port_value ../values.properties**
 
