@@ -10,5 +10,18 @@ qu'elle affcihe sur la console, en fonction des critères choisis par l'opérate
 
 ![My Image](../pictures/display_datas.jpg)
 
+# Construire les exécutables :
 
+```
+Construire l'exécutable : 
+```
+**make build** 
+```
+Regrouper dans un fichier zip les fichiers cpp, hpp et le makefie
+```
+**make zip**
+```
+Supprimer les fichiers *.o, l'exécutable le zip
+```
+**make clean**
 
