@@ -38,7 +38,7 @@ namespace Manage
 
        vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year)
        {
-             string query = this->manageProperties->get_value_by_key("sql_by_day");
+             string query = this->manageProperties->get_value_by_key("sql_by_day_month_year");
              this->utils->replace_str(query, "#1", to_string(day));
              this->utils->replace_str(query, "#2", to_string(month));
              this->utils->replace_str(query, "#3", to_string(year));
@@ -51,7 +51,7 @@ namespace Manage
 
        vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour)
        {
-             string query = this->manageProperties->get_value_by_key("sql_by_hour");
+             string query = this->manageProperties->get_value_by_key("sql_by_hour_minute");
 
              this->utils->replace_str(query, "#1", to_string(hour));
              this->utils->replace_str(query, "#2", to_string(minute));
