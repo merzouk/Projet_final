@@ -59,10 +59,11 @@ namespace Manage
 
        vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour)
        {
-             string query = this->manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
+             string query = this->manageProperties->get_value_by_key("sql_by_hour");
 
              replace_str(query, "#1", to_string(hour));
              replace_str(query, "#2", to_string(minute));
+
              cout << "query ===> " << query << endl;
              const char *sql_query = query.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
