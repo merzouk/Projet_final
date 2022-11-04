@@ -7,6 +7,15 @@
 
 namespace Manage
 {
+       bool replace_str(std::string& str, const std::string& from, const std::string& to)
+       {
+           size_t start_pos = str.find(from);
+           if(start_pos == std::string::npos)
+               return false;
+           str.replace(start_pos, from.length(), to);
+           return true;
+       }
+
        vector<DatasCapteur *> Factory::load_all_datas()
        {
                 string sql = manageProperties->get_value_by_key("sql_query");
@@ -17,34 +26,45 @@ namespace Manage
 
         vector<DatasCapteur *> Factory::load_data_by_id(int id)
         {
-             string sql = this->manageProperties->get_value_by_key("sql_by_id") +to_string(id);
-             const char *sql_query = sql.c_str();
+             string query = this->manageProperties->get_value_by_key("sql_by_id");
+             replace_str(query, "#1", to_string(id));
+             cout <<"query ===> " << query << endl;
+             const char *sql_query = query.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
         }
 
         vector<DatasCapteur *> Factory::load_data_by_capteur_name(string capteur_id )
         {
-             string sql = this->manageProperties->get_value_by_key("sql_by_cpt_id") +capteur_id+"'";
-             const char *sql_query = sql.c_str();
+             string query = this->manageProperties->get_value_by_key("sql_by_cpt_id");
+             replace_str(query, "#1", capteur_id);
+             cout <<"query ===> " << query << endl;
+             const char *sql_query = query.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
         }
 
        vector<DatasCapteur *>  Factory::load_data_by_date(int day, int month, int year)
        {
-             string sql = this->manageProperties->get_value_by_key("sql_by_day") + to_string(day)+" and mois = "+to_string(month)+ " and annee = "+to_string(year);
-             //cout <<"sql ===> " << sql << endl;
-             const char *sql_query = sql.c_str();
+             string query = this->manageProperties->get_value_by_key("sql_by_day");
+             replace_str(query, "#1", to_string(day));
+             replace_str(query, "#2", to_string(month));
+             replace_str(query, "#3", to_string(year));
+
+             cout <<"query ===> " << query << endl;
+             const char *sql_query = query.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
        }
 
        vector<DatasCapteur *> Factory::load_data_by_hour(int minute, int hour)
        {
-             string sql = this->manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
-             //cout << "sql => " << sql << endl;
-             const char *sql_query = sql.c_str();
+             string query = this->manageProperties->get_value_by_key("sql_by_hour") + to_string(hour)+" and minute = "+to_string(minute);
+
+             replace_str(query, "#1", to_string(hour));
+             replace_str(query, "#2", to_string(minute));
+             cout << "query ===> " << query << endl;
+             const char *sql_query = query.c_str();
              vector<DatasCapteur *> vect_datas = this->dataAccessObject->load_datas(this->manageProperties->get_value_by_key("url_data_base").c_str(), sql_query);
              return vect_datas;
        }
