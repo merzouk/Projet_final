@@ -26,6 +26,7 @@ namespace Manage
                       bool validate_minute(int minute);
                       bool validate_string(string s);
                       bool replace_str(std::string& str, const std::string& from, const std::string& to);
+                      bool replace_all_str(std::string& str, const std::string& from, const std::string& to);
       };
 }
 
