@@ -22,17 +22,17 @@ namespace Datas
        {
          private:
                 int id; // id en base de donnees
-                string identite_capt; // identite unique du capteur qui procede a l'acquisition des donnees
+                string identite_capt; // identite unique du capteur
                 float temperature; // valeur de la temperature
                 float humidity; // valeur de l'humidite
                 float pressure; // valeur de la pression
-                float gyro_x; // position x en coordonnees 3D de la position de l'acquisition des donnees
-                float gyro_y; // position y en coordonnees 3D de la position de l'acquisition des donnees
-                float gyro_z; // position z en coordonnees 3D de la position de l'acquisition des donnees
-                float accel_x;
-                float accel_y;
-                float accel_z;
-                int seconde;
+                float gyro_x; // position x en coordonnees 3D de la position du capteur
+                float gyro_y; // position y en coordonnees 3D de la position du capteur
+                float gyro_z; // position z en coordonnees 3D de la position du capteur
+                float accel_x; // triple axis-boussole magnetometre en x
+                float accel_y; // triple axis-boussole magnetometre en y
+                float accel_z; // triple axis-boussole magnetometre en z
+                int seconde; // la seconde de l'acquisition des donnees
                 int minute; // la minute de l'acquisition des donnees
                 int heure; // heure de l'acquisition des donnees
                 int jour; // jour de l'acquisition des donnees
@@ -120,7 +120,10 @@ namespace Datas
                                        +"\"gyro_z\": 0,  \"accel_x\": 0, \"accel_y\": 0,  \"accel_z\": 0}";
                      return str;
                }
-
+               /**
+                 * Convertit les donnees de l'objet au format JSON
+                 *
+                 */
                std::string build_json_from_object()
                {
                 std::string str1 =  this->build_json(); ;
