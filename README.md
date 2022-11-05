@@ -1,6 +1,20 @@
 # Projet de Fin de Formation
 Projet CPP pour la formation C/CPP embarqué
 
+## Outils utilisés 
+```
+- C/C++
+- Boost asio
+- Python
+- Script Shell
+- Sql
+- Sqlite
+- Git
+- Json
+- RapidJson
+```
+
+
 ```
 Le but de ce projet est de constituer un système de génération de logs. 
 Ces logs seront destinés à être utilisés par des DataScientists.
