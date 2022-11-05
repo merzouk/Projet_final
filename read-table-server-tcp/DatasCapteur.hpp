@@ -22,22 +22,27 @@ namespace Datas
        {
          private:
                 int id; // id en base de donnees
+
                 string identite_capt; // identite unique du capteur
+
                 float temperature; // valeur de la temperature
                 float humidity; // valeur de l'humidite
                 float pressure; // valeur de la pression
+
                 float gyro_x; // position x en coordonnees 3D de la position du capteur
                 float gyro_y; // position y en coordonnees 3D de la position du capteur
                 float gyro_z; // position z en coordonnees 3D de la position du capteur
+
                 float accel_x; // triple axis-boussole magnetometre en x
                 float accel_y; // triple axis-boussole magnetometre en y
                 float accel_z; // triple axis-boussole magnetometre en z
+
                 int seconde; // la seconde de l'acquisition des donnees
                 int minute; // la minute de l'acquisition des donnees
                 int heure; // heure de l'acquisition des donnees
                 int jour; // jour de l'acquisition des donnees
                 int mois; // mois de l'acquisition des donnees
-                int annee; //annee de l'acquisition des donnees
+                int annee; // annee de l'acquisition des donnees
 
          public:
               DatasCapteur(int id, string identite_capt, float temperature, float humidity, float pressure,

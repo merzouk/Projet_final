@@ -97,9 +97,9 @@ namespace DataAccess
                     std::cout << "SQL Error: " << errorMsg << std::endl;
                     sqlite3_free(errorMsg);
                      if(db)
-                       {
+                     {
                          sqlite3_close(db);
-                       }
+                     }
                        return datas;
                 }
                 // close database
