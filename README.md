@@ -15,6 +15,7 @@ Projet CPP pour la formation C/CPP embarqué
 - RapidJson
 ```
 
+## Introduction
 
 ```
 Le but de ce projet est de constituer un système de génération de logs. 
