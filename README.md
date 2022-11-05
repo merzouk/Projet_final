@@ -10,6 +10,7 @@ Projet CPP pour la formation C/CPP embarqué
 - Sql
 - Sqlite
 - Git
+- GitLab
 - Json
 - RapidJson
 ```
