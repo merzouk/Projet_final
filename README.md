@@ -170,6 +170,30 @@ int main()
 }
 ```
 
+# Installation SqLite
+
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install sqlite3
+sudo apt install build-essential
+```
+
+**Pour l'édition des liens**
+
+```
+sudo apt-get install libsqlite3-dev
+```
+
+**Vérification**
+
+```
+sqlite3 --version
+
+3.22.0 2018-01-22 18:45:57 0c55d179733b46d8d0ba4d88e01a25e10677046ee3da1d5b1581e86726f2alt1
+```
+
+
 # Ajout job dans crontab
 
 ```
