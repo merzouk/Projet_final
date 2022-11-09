@@ -206,7 +206,7 @@ pour le moment c'est chaque 2 minutes :
 le shell "run_prog_insert_datas.sh" se trouve dans le repertoire : /home/ubuntu/projet_final/insert/
 ```
 
-```shell
+```c++
 ls -l /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
 
 chmod +x  /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
