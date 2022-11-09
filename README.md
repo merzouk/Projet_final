@@ -160,7 +160,7 @@ pour vérifier il suffit de compiler et exécuter le code ci-dessous :
 
 ```
 
-```
+```c++
 #include <iostream>
 #include <boost/version.hpp>
 
