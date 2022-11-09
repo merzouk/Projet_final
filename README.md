@@ -228,7 +228,7 @@ propose de choisir l'editeur de texte :
 ajouter la ligne ci-dessous :
 ```
 
-```
+```c++
 */2 * * * *  cd /home/ubuntu/projet_final/insert && sh  run_prog_insert_datas.sh
 ```
 
