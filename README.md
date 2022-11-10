@@ -5,6 +5,7 @@ Projet CPP pour la formation C/CPP embarqué
 ```
 - C/C++
 - <a href="https://www.boost.org/doc/libs/"><img align="right"  alt="Boost Asio">Boost asio</a>
+<a href="https://discord.gg/VQYkppcgqN"><img align="right" src="https://discordapp.com/api/guilds/790164930083028993/embed.png?style=banner2" alt="Join us on Discord"></a>
 - Python
 - Script Shell
 - Sql
