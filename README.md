@@ -4,11 +4,12 @@ Projet CPP pour la formation C/CPP embarqué
 ## Outils utilisés 
 ```
 - C/C++
-- [Boost Asio with C++](https://www.boost.org/doc/libs/).
-- Python
+- Boost Asio 1_80_0
+- Python 3
+- Debian 11
 - Script Shell
 - Sql
-- Sqlite
+- Sqlite 3.34.1
 - Git
 - GitLab
 - Json
