@@ -11,7 +11,6 @@
 
 using namespace std;
 using namespace Manage;
-using namespace ManageLog;
 
 static int callback(void *NotUsed, int argc, char **argv, char **szColName)
 {
@@ -20,28 +19,26 @@ static int callback(void *NotUsed, int argc, char **argv, char **szColName)
 
 int main(int argc, char **argv)
 {
-        // Initiate logger (default name is 'log')
-        LOG_INIT_CERR();
         sqlite3 *db;
         char *errorMsg = 0;
 
         if(argc < 2)
         {
-                log(LOG_ERR) << "Le chemin vers le fichier ressources est obligatoire\n";
+                Logger::log(2, "Le chemin vers le fichier ressources est obligatoire\n");
                 return 1;
         }
 
         string properties_file = argv[1];
         if(properties_file.size() == 0)
 	 {
-                log(LOG_ERR)  << "Le fichier ressources \"" << properties_file << "\" n'est pas renseigne, parametres manquants, connexion impossible"  << "\n" ;
+                Logger::log(2,  "Le fichier ressources \"" + properties_file + "\" n'est pas renseigne, parametres manquants, connexion impossible" );
                 return 1;
 	 }
 	 ManageProperties * manageProperties = new ManageProperties();
         manageProperties->read_contains_properties_file(properties_file, ':');
         if(manageProperties->size_map() == 0)
         {
-                log(LOG_ERR)  << "Aucun parametre trouve dans le fichier ressources, creation de la base de donnees impossible\n";
+                Logger::log(2,  "Aucun parametre trouve dans le fichier ressources, creation de la base de donnees impossible");
                 return 1;
 	 }
 
@@ -53,11 +50,11 @@ int main(int argc, char **argv)
 
         if (rc)
         {
-                log(LOG_ERR) << "Can't open database\n";
+                Logger::log(2,  "Can't open database");
         }
         else
         {
-                log(LOG_INFO) << "Open database successfully\n";
+                Logger::log(1,  "Open database successfully");
         }
 
 	 string sql_query_create_table =  manageProperties->get_value_by_key("request_create_table");
@@ -69,8 +66,9 @@ int main(int argc, char **argv)
         rc = sqlite3_exec(db, pSQL, callback, 0, &errorMsg);
         if (rc != SQLITE_OK)
         {
-                log(LOG_ERR) << "Can't create table inside database \n";
-                log(LOG_ERR) << "SQL Error :  " << errorMsg  << "\n";
+                Logger::log(2, "Can't create table inside database");
+                Logger::log(2, "SQL Error :  ");
+                Logger::log(2,  errorMsg  );
                 sqlite3_free(errorMsg);
                 if (db)
                 {
@@ -82,7 +80,7 @@ int main(int argc, char **argv)
         // close database
         if (db)
         {
-                log(LOG_INFO) << "Create table successfully\n";
+                Logger::log(1,  "Create table successfully");
                 sqlite3_close(db);
         }
 
