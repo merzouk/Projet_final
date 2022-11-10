@@ -11,7 +11,6 @@
 
 
 using namespace Manage;
-using namespace ManageLog;
 
 bool validate_ip_address(const std::string& ip_address)
 {
@@ -21,12 +20,10 @@ bool validate_ip_address(const std::string& ip_address)
 
 int main(int argc, char ** argv)
 {
-       // Initiate logger (default name is 'log')
-       LOG_INIT_CERR();
 
        if(argc < 3)
        {
-             log(LOG_ERR)  << "Entree du programme attend trois arguments exec, port et addresse ip du server\n";
+             Logger::log(2, "Entree du programme attend trois arguments exec, port et addresse ip du server");
              return 1;
        }
 
@@ -37,28 +34,32 @@ int main(int argc, char ** argv)
        }
        catch(std::exception const & ex)
        {
-            log(LOG_ERR)  << "Le numero de port est au format entier : " << argv[1] << ex.what() << "\nconnexion impossible\n";
-            return 1;
+             string p = argv[1];
+             Logger::log(2, "Le numero de port est au format entier : " +p);
+             Logger::log(2, ex.what());
+             Logger::log(2,  "\nconnexion impossible");
+             return 1;
        }
 	string ip_address = argv[2];
 
 	if(port == 0)
        {
-              log(LOG_ERR)  <<  "Le numero de port \"" << argv[1] <<"\" n'est pas renseigne, connexion impossible" << "\n" ;
+              string p = argv[1];
+              Logger::log(2,  "Le numero de port non renseigne, connexion impossible : " + p);
               return 1;
        }
        if(port < 0) port *=-1;
 
        if(ip_address.size() == 0)
        {
-              log(LOG_ERR)  << "L'addresse ip du server non renseigne, connexion impossible : " << ip_address << "\n";
-              return 1;
+               Logger::log(2, "L'addresse ip du server non renseigne, connexion impossible : " +ip_address );
+               return 1;
        }
 
        if(validate_ip_address(ip_address) == 0)
        {
-              log(LOG_ERR)  << "Le format de l'addresse ip du server n'est pas correcte, connexion impossible : " << ip_address << "\n";
-              return 1;
+               Logger::log(2, "Le format de l'addresse ip du server n'est pas correcte, connexion impossible : " + ip_address );
+               return 1;
        }
 
        Menu * menu = new Menu(port, ip_address);

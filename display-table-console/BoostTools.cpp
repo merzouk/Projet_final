@@ -1,4 +1,5 @@
 #include "BoostTools.hpp"
+#include "Logger.hpp"
 
 namespace Manage
 {
@@ -18,7 +19,8 @@ namespace Manage
                 }
                 else
                 {
-                  cout << "send request failed: " << error.message() << endl;
+                  Logger::log(2, "send request failed: ");
+                  Logger::log(2, error.message());
                 }
 
                 boost::asio::streambuf receive_buffer;
@@ -26,7 +28,8 @@ namespace Manage
 
                 if( error && error != boost::asio::error::eof )
                 {
-                  cout << "receive request failed: " << error.message() << endl;
+                   Logger::log(2, "receive request failed: ");
+                   Logger::log(2, error.message());
                   return "";
                 }
                 else
