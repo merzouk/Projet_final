@@ -4,7 +4,7 @@ Projet CPP pour la formation C/CPP embarqué
 ## Outils utilisés 
 ```
 - C/C++
-- [Boost asio➚](https://www.boost.org/doc/libs/)
+- <a href="https://www.boost.org/doc/libs/"><img align="right"  alt="Boost Asio">Boost asio</a>
 - Python
 - Script Shell
 - Sql
