@@ -173,7 +173,7 @@ int main()
 
 # Installation SqLite
 
-```bash
+```cpp
 sudo apt update
 sudo apt upgrade
 sudo apt install sqlite3
