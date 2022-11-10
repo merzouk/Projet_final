@@ -108,10 +108,12 @@ Cette application doit être simple et conviviale.
 
 ```
 Afin de disposer de ces données, vous aurez la possibilité de vous connecter via le protocole SSH. 
-Toutes les informations de connexion (adresse IP, login et mot de passe, clé) vous seront communiquées ultérieurement.
+Toutes les informations de connexion (adresse IP, login et mot de passe, clé) vous seront communiquées 
+ultérieurement.
 
-L’ensemble des travaux réalisés devra être mis sur un dépôt afin de centraliser les informations et de faciliter 
-la communication entre les membres du projet. Vous ferez en sorte de bien vous répartir les tâches.
+L’ensemble des travaux réalisés devra être mis sur un dépôt afin de centraliser les informations 
+et de faciliter la communication entre les membres du projet. Vous ferez en sorte de bien vous 
+répartir les tâches.
 
 Vous constituerez une présentation (PowerPoint ou équivalent) qui vous servira de fil conducteur 
 pour le jour de la soutenance. Lors de la soutenance, il va de soi que le temps de parole entre 
@@ -153,13 +155,12 @@ sudo ./b2 install threading=multi link=shared
 ## Remarque : 
 
 ```
-si une vesrion ultérieure de boost est installée, il faut commencer par la désintaller, pour vérifier 
-
-il suffit de compiler et exécuter le code ci-dessous :
-
-```
+si une vesrion ultérieure de boost est installée, il faut commencer par la désintaller, 
+pour vérifier il suffit de compiler et exécuter le code ci-dessous :
 
 ```
+
+```c++
 #include <iostream>
 #include <boost/version.hpp>
 
@@ -197,14 +198,15 @@ sqlite3 --version
 # Ajout job dans crontab
 
 ```
-L'intervalle d'execution du programme d'insertion en base de donnees est parametrable, pour le moment c'est chaque 2 minutes :
+L'intervalle d'execution du programme d'insertion en base de donnees est parametrable, 
+pour le moment c'est chaque 2 minutes :
 ```
 
 ```
 le shell "run_prog_insert_datas.sh" se trouve dans le repertoire : /home/ubuntu/projet_final/insert/
 ```
 
-```
+```c++
 ls -l /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
 
 chmod +x  /home/ubuntu/projet_final/insert/run_prog_insert_datas.sh
@@ -226,7 +228,7 @@ propose de choisir l'editeur de texte :
 ajouter la ligne ci-dessous :
 ```
 
-```
+```c++
 */2 * * * *  cd /home/ubuntu/projet_final/insert && sh  run_prog_insert_datas.sh
 ```
 
