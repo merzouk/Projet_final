@@ -1,8 +1,6 @@
 #include "ManageProperties.hpp"
 #include "Logger.hpp"
 
-using namespace ManageLog;
-
 namespace Manage
 {
        string ManageProperties::get_value_by_key(string key)
@@ -10,7 +8,7 @@ namespace Manage
               int len = int(key.length());
               if (len == 0)
               {
-                     cout << "La cle : " << key << "n'est pas valide " << endl;
+                     Logger::log(1, "La cle : " + key + " n'est pas valide ");
                      return " ";
               }
               map<string, string>::iterator it = this->map_properties.begin();
@@ -19,7 +17,7 @@ namespace Manage
                      if (key == it->first)
                             return it->second;
               }
-              cout << "La cle " << key << " non trouve " << endl;
+              Logger::log(1, "La cle " + key + " non trouve ");
               return " ";
        }
 
@@ -28,7 +26,7 @@ namespace Manage
               int len = int(key.length());
               if (len == 0)
               {
-                     cout << "La cle : " << key << "n'est pas valide " << endl;
+                     Logger::log(1, "La cle : " + key + " n'est pas valide ");
                      return " ";
               }
               map<string, string>::iterator it = this->map_properties.begin();
@@ -48,8 +46,8 @@ namespace Manage
               }
               for (auto itr = this->map_properties.begin(); itr != this->map_properties.end(); ++itr)
               {
-                     cout << endl << "key : " << itr->first << endl << "Value : "
-                                   << itr->second << endl;
+                    Logger::log(1, "key : " + itr->first);
+                    Logger::log(1, "Value : "+ itr->second);
               }
        }
 
@@ -61,9 +59,7 @@ namespace Manage
               }
               else
               {
-                     cout << "Cle : " << key << endl;
-                     cout << endl
-                          << "Suppression impossible, la cle n'existe pas dans map_properties";
+                     Logger::log(1, "Suppression impossible, la cle "+key +" n'existe pas dans map_properties");
               }
        }
 
@@ -71,15 +67,12 @@ namespace Manage
        {
               if (key.length() == 0)
               {
-                     cout << endl << "Ajout impossible, la cle n'est n'est pas renseignee : "
-                                   << key << endl;
+                     Logger::log(2, "Ajout impossible, la cle n'est n'est pas renseignee : "+ key );
                      return;
               }
               if (value.length() == 0)
               {
-                     cout << endl
-                                   << "Ajout impossible, la valeur n'est n'est pas renseignee : "
-                                   << value << endl;
+                     Logger::log(2, "Ajout impossible, la valeur n'est n'est pas renseignee : "+value);
                      return;
               }
 
@@ -89,9 +82,7 @@ namespace Manage
               }
               else
               {
-                     cout << "Cle " << key << endl;
-                     cout << "Ajout impossible, la cle existe dans map_properties " << key
-                                   << endl;
+                     Logger::log(2, "Ajout impossible, la cle existe dans map_properties " +key);
               }
        }
 
@@ -120,7 +111,6 @@ namespace Manage
 
        void ManageProperties::read_contains_properties_file(std::string file_name, const char delimiter)
        {
-              LOG_INIT_CERR();
               try
               {
                      std::ifstream properties(file_name);
@@ -135,12 +125,13 @@ namespace Manage
                      }
                      else
                      {
-                            log(LOG_ERR) << "Erreur pendant la tentative d'ouverture du fichier : " + file_name +"\n";
+                            Logger::log(2,  "Erreur pendant la tentative d'ouverture du fichier : " + file_name);
                      }
               }
               catch(exception &ex)
               {
-                   log(LOG_ERR) << "Erreur durant l'ouverture du fichier :  "+file_name+"  : "+ std::string(ex.what()) + "\n";
+                   Logger::log(2, "Erreur durant l'ouverture du fichier :  "+file_name);
+                   Logger::log(2, std::string(ex.what()));
               }
        }
 }

@@ -18,13 +18,11 @@ using std::endl;
 #include <cstring>
 #include <bits/stdc++.h>
 
-#include "Logger.hpp"
-
 #include <chrono> //milliseconds
 #include <thread> //sleep_for
+#include "Logger.hpp"
 
 using namespace Manage;
-using namespace ManageLog;
 
 string read_(tcp::socket &socket)
 {
@@ -44,12 +42,9 @@ void send_(tcp::socket &socket, const string &message)
 
 int main(int argc, char ** argv)
 {
-       // Initiate logger (default name is 'log')
-       LOG_INIT_CERR();
-
        if(argc < 3)
        {
-            log(LOG_ERR)  << "Entree du programme attend trois arguments exec, port et et path vers le fichier de resources\n";
+            Logger::log(2,  "Entree du programme attend trois arguments exec, port et et path vers le fichier de resources");
             return 1;
        }
 
@@ -60,7 +55,10 @@ int main(int argc, char ** argv)
        }
        catch(std::exception const & ex)
        {
-            log(LOG_ERR)  << "Le numero de port est au format entier : " << argv[1] << ex.what() << "\nconnexion impossible\n";
+            string p = argv[1];
+            Logger::log(2,  "Le numero de port est au format entier : " +p);
+            Logger::log(2,  ex.what());
+            Logger::log(2,  "connexion impossible");
             return 1;
        }
 
@@ -68,12 +66,13 @@ int main(int argc, char ** argv)
 
        if(port == 0)
        {
-              log(LOG_ERR)  <<  "Le numero de port \"" << argv[1] <<"\" n'est pas renseigne, connexion impossible" << "\n" ;
+              string p = argv[1];
+              Logger::log(2, "Le numero de port \"" +p+"\" n'est pas renseigne, connexion impossible") ;
               return 1;
        }
        if(properties_file.size() == 0)
 	{
-           log(LOG_ERR)  <<  "Le fichier ressources \"" << properties_file <<"\"n'est pas renseigne, parametres manquants, connexion impossible : "  << "\n" ;
+           Logger::log(2, "Le fichier ressources \"" + properties_file +"\"n'est pas renseigne, parametres manquants, connexion impossible : ") ;
            return 1;
 	}
        if(port < 0) port *=-1;
@@ -83,7 +82,7 @@ int main(int argc, char ** argv)
        manageProperties->read_contains_properties_file(properties_file, ':');
        if(manageProperties->size_map() == 0)
 	{
-	     log(LOG_ERR)  <<   "Aucun parametre trouve dans le fichier ressources, connexion impossible\n";
+	     Logger::log(2, "Aucun parametre trouve dans le fichier ressources, connexion impossible");
             return 1;
 	}
 
@@ -100,20 +99,21 @@ int main(int argc, char ** argv)
 
                 string message_request = read_(socket_);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "message request : " << message_request << "\n";
+                Logger::log(1, "message request : "+ message_request);
 
                 string message_response = factory->load_message_response(message_request);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "message response : \n" << message_response << "\n";
+                 Logger::log(1, "message response : \n" + message_response);
 
                 send_(socket_, message_response);
                 std::cout << std::endl << std::endl;
-                log(LOG_INFO) << "Server TCP : sent response to client successfully !\n";
+                 Logger::log(1,  "Server TCP : sent response to client successfully !");
               }
               catch(exception & ex)
               {
-                     log(LOG_ERR)  << "Erreur durant le traitement de la requete : " << ex.what() << "\n";
-                     log(LOG_ERR)  << "Server TCP : sent response to client faillures !\n" ;
+                     Logger::log(2,  "Erreur durant le traitement de la requete : ");
+                     Logger::log(2,  ex.what() );
+                     Logger::log(2,  "Server TCP : sent response to client faillures ") ;
               }
         }
         delete factory;
