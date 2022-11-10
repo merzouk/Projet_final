@@ -2,9 +2,9 @@
 #include <sqlite3.h>
 #include <string>
 
-#include "ManageProperties.hpp"
+#include "../header/ManageProperties.hpp"
 
-#include "Logger.hpp"
+#include "../header/Logger.hpp"
 
 #include <chrono> //milliseconds
 #include <thread> //sleep_for

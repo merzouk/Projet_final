@@ -1,15 +1,15 @@
 #Manage cpp project by Makefile
 
-CLEAN = rm -rf *.o
+CLEAN = rm -rf sources/*.o
 PROG = create_db
 CLEAN_EXEC=rm $(PROG)
 
 ARCHIVE=sortie.zip
-TARGET_ARCHIVE=*.cpp *.hpp Makefile
+TARGET_ARCHIVE=sources/*.cpp header/*.hpp Makefile
 ZIP=tar -cvzf $(ARCHIVE) $(TARGET_ARCHIVE)
 CLEAN_ZIP=rm $(ARCHIVE)
 
-CC = g++ -L /usr/lib/ -L/usr/include  -o $(PROG) *.cpp
+CC = g++ -L /usr/lib/ -L/usr/include  -o $(PROG) sources/*.cpp
 SQLITE = -lpthread -lsqlite3
 
 

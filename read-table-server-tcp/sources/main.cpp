@@ -1,8 +1,8 @@
-#include "Factory.hpp"
-#include "Parser.hpp"
+#include "../header/Factory.hpp"
+#include "../header/Parser.hpp"
 #include <iostream>
 #include <boost/asio.hpp>
-#include "ManageProperties.hpp"
+#include "../header/ManageProperties.hpp"
 
 using namespace boost::asio;
 using ip::tcp;
@@ -20,7 +20,7 @@ using std::endl;
 
 #include <chrono> //milliseconds
 #include <thread> //sleep_for
-#include "Logger.hpp"
+#include "../header/Logger.hpp"
 
 using namespace Manage;
 

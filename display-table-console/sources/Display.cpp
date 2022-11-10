@@ -1,5 +1,5 @@
-#include "Display.hpp"
-#include "DatasCapteur.hpp"
+#include "../header/Display.hpp"
+#include "../header/DatasCapteur.hpp"
 
 using namespace Datas;
 #include <iostream>

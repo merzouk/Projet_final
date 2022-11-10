@@ -1,5 +1,5 @@
-#include "Console.hpp"
-#include "JsonTools.hpp"
+#include "../header/Console.hpp"
+#include "../header/JsonTools.hpp"
 
 
 namespace Manage

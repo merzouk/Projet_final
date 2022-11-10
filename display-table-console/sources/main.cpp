@@ -1,5 +1,5 @@
-#include "Menu.hpp"
-#include "Logger.hpp"
+#include "../header/Menu.hpp"
+#include "../header/Logger.hpp"
 
 #include <chrono> //milliseconds
 #include <thread> //sleep_for

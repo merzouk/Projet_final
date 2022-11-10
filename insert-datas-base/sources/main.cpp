@@ -1,5 +1,5 @@
-#include "JsonTools.hpp"
-#include "ManageProperties.hpp"
+#include "../header/JsonTools.hpp"
+#include "../header/ManageProperties.hpp"
 
 #include <exception>
 

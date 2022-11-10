@@ -1,4 +1,4 @@
-#include "JsonTools.hpp"
+#include "../header/JsonTools.hpp"
 
 namespace Manage
 {
@@ -31,7 +31,7 @@ namespace Manage
               std::ifstream jsonfile(path_to_file);
               if(!jsonfile)
               {
-                      std::cout << "Erreur d'ouverture du fichier : " << path_to_file << std::endl;
+                      Logger::log(2, "Erreur d'ouverture du fichier : " + path_to_file);
                       system("pause");
                       return datas;
               }
@@ -44,8 +44,8 @@ namespace Manage
            }
            catch(exception& e)
            {
-               cout << "Erreur pendant la tentative d'ouverture du fichier json : "
-                    << path_to_file << " : "<< e.what() << endl;
+               Logger::log(2, "Erreur pendant la tentative d'ouverture du fichier json : "+path_to_file );
+               Logger::log(2, e.what());
                return datas;
            }
            return datas;
@@ -56,7 +56,7 @@ namespace Manage
                      cout.fill(' ');
                      if(!data)
                      {
-                           cout <<endl << "Aucune donnee trouvee pour les criteres choisis " << endl;
+                           Logger::log(1, "Aucune donnee trouvee pour les criteres choisis");
                            return;
                      }
                      cout << endl << endl;
@@ -79,54 +79,6 @@ namespace Manage
                                        << endl;
 
 
-                     cout << setw(7)  << data->get_id() <<"|"
-                          << setw(20) << data->get_identite_capt() <<"|"
-                          << setw(13) << data->get_temperature()   <<"|"
-                          << setw(10) << data->get_humidity()      <<"|"
-                          << setw(10) << data->get_pressure()      <<"|"
-
-                          << setw(10) << data->get_gyro_x()        <<"|"
-                          << setw(10) << data->get_gyro_y()        <<"|"
-                          << setw(10) << data->get_gyro_z()        <<"|"
-
-                          << setw(10) << data->get_accel_x()       <<"|"
-                          << setw(10) << data->get_accel_y()       <<"|"
-                          << setw(10) << data->get_accel_z()       <<"|"
-
-                          << setw(15) << build_date(data)          <<"|"
-                          << setw(10) << build_hour(data)          <<"|"
-                                                                   << endl;
-       }
-
-       void JsonTools::print_list_data(vector<DatasCapteur *> datas)
-       {
-                     cout.fill(' ');
-                     if(datas.size() == 0)
-                     {
-                           cout <<endl << "Aucune donnee trouvee pour les criteres choisis " << endl;
-                           return;
-                     }
-                     cout << endl << endl;
-                     cout << setw(7)  << "Id" <<"|"
-                          << setw(20) << "Capteur" <<"|"
-                          << setw(13) << "Temperature" <<"|"
-                          << setw(10) << "Humidity" <<"|"
-                          << setw(10) << "Pressure" <<"|"
-
-                          << setw(10) << "Gyro_X" <<"|"
-                          << setw(10) << "Gyro_Y" <<"|"
-                          << setw(10) << "Gyro_Z" <<"|"
-
-                          << setw(10) << "Accel_X" <<"|"
-                          << setw(10) << "Accel_Y" <<"|"
-                          << setw(10) << "Accel_Z" <<"|"
-
-                          << setw(15) << "Date" <<"|"
-                          << setw(10) << "Heure" <<"|"
-                                       << endl;
-
-                  for(DatasCapteur * data : datas)
-                  {
                      cout << setw(7)  << data->get_id() <<"|"
                           << setw(20) << data->get_identite_capt() <<"|"
                           << setw(13) << data->get_temperature() <<"|"
@@ -144,7 +96,6 @@ namespace Manage
                           << setw(15) << build_date(data)    <<"|"
                           << setw(10) << build_hour(data)    <<"|"
                                                              << endl;
-                  }
        }
 
        void extract_date_infos(DatasCapteur * datasCapteur, string date_str, char delimiter)
@@ -208,9 +159,9 @@ namespace Manage
           extract_hour_infos(datasCapteur, hour_str, ':');
        }
 
-       DatasCapteur * JsonTools::build_object_from_json(string json_string)
+       DatasCapteur * JsonTools::build(string str)
        {
-           RSJresource  resource (json_string); // RSJ parser (delayed parser)
+           RSJresource  resource (str); // RSJ parser (delayed parser)
 
            DatasCapteur * datasCapteur = new DatasCapteur();
 
@@ -222,7 +173,7 @@ namespace Manage
                    return datasCapteur;
            }
 
-           datasCapteur->set_id(resource["capteur"]["id"].as<int>(0));
+           datasCapteur->set_id(0);
            datasCapteur->set_identite_capt(id_capteur);
            datasCapteur->set_temperature(resource["capteur"]["temperature"].as<double>(0));
            datasCapteur->set_humidity(resource["capteur"]["humidity"].as<double>(0));
@@ -239,5 +190,32 @@ namespace Manage
            string str_date = resource["capteur"]["str_date"].as<std::string>("str_date");
            convert_time_and_extract_infos(datasCapteur, str_date);
            return datasCapteur;
+       }
+
+       int JsonTools::build_Object_from_json_save(string path_to_file, const char * path_data_base)
+       {
+           std::string datas_str = read_json_file_contains(path_to_file);
+           DatasCapteur * data = build(datas_str);
+
+           if(data->get_identite_capt() == "unknown_id_capteur" || data->get_id() == -1)
+           {
+                  Logger::log(1, "Fichier charge : " + path_to_file);
+                  Logger::log(1, "Aucune donnee chargee, traitement termine ");
+                  string command = this->manageProperties->get_value_by_key("script_faillures");
+                  command = command + "  " + path_to_file;
+                  system(command.c_str());
+                  return 1;
+           }
+           DataAccessObject * dataAccessObject = new DataAccessObject();
+           //print_list_data(data);
+           dataAccessObject->insert_data_into_table(data, path_data_base);
+
+           delete dataAccessObject;
+           dataAccessObject = nullptr;
+
+            string command = this->manageProperties->get_value_by_key("script_success");
+            command = command + "  " + path_to_file;
+            system(command.c_str());
+           return 0;
        }
 }
