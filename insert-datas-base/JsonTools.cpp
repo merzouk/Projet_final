@@ -31,7 +31,7 @@ namespace Manage
               std::ifstream jsonfile(path_to_file);
               if(!jsonfile)
               {
-                      std::cout << "Erreur d'ouverture du fichier : " << path_to_file << std::endl;
+                      Logger::log(2, "Erreur d'ouverture du fichier : " + path_to_file);
                       system("pause");
                       return datas;
               }
@@ -44,8 +44,8 @@ namespace Manage
            }
            catch(exception& e)
            {
-               cout << "Erreur pendant la tentative d'ouverture du fichier json : "
-                    << path_to_file << " : "<< e.what() << endl;
+               Logger::log(2, "Erreur pendant la tentative d'ouverture du fichier json : "+path_to_file );
+               Logger::log(2, e.what());
                return datas;
            }
            return datas;
@@ -56,7 +56,7 @@ namespace Manage
                      cout.fill(' ');
                      if(!data)
                      {
-                           cout <<endl << "Aucune donnee trouvee pour les criteres choisis " << endl;
+                           Logger::log(1, "Aucune donnee trouvee pour les criteres choisis");
                            return;
                      }
                      cout << endl << endl;
@@ -199,8 +199,8 @@ namespace Manage
 
            if(data->get_identite_capt() == "unknown_id_capteur" || data->get_id() == -1)
            {
-                  cout << "Fichier charge : " << path_to_file << endl;
-                  cout << "Aucune donnee chargee, traitement termine "<<endl;
+                  Logger::log(1, "Fichier charge : " + path_to_file);
+                  Logger::log(1, "Aucune donnee chargee, traitement termine ");
                   string command = this->manageProperties->get_value_by_key("script_faillures");
                   command = command + "  " + path_to_file;
                   system(command.c_str());

@@ -13,6 +13,7 @@
 #include "DatasCapteur.hpp"
 #include "DataAccessObject.hpp"
 #include "ManageProperties.hpp"
+#include "Logger.hpp"
 
 
 using namespace Datas;
