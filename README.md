@@ -3,7 +3,8 @@ Projet CPP pour la formation C/CPP embarqué
 
 ## Outils utilisés 
 ```
-- C/C++
+- C
+- C++ 20
 - Boost Asio 1_80_0
 - Python 3
 - Debian 11
