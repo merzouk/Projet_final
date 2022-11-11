@@ -146,7 +146,7 @@ namespace Manage
 
                      void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
-                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log, string shell_file_mv);
+                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log, shell_file_mv);
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
                            string msg_file = prepare_message_logger_file(level_logger, message_logger);
                            fstream filestr;
