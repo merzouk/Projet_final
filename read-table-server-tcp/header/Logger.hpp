@@ -10,6 +10,8 @@
 #include <ctime>
 #include <string>
 
+#include <filesystem>
+
 using namespace std;
 
 namespace Manage
@@ -102,6 +104,34 @@ namespace Manage
                      }
 
 
+
+                     void static check_file_size(std::string filename, std::string path_file_archive, int limit_size_file_log)
+                     {
+                         try
+                         {
+                                ifstream in_file(filename, ios::binary);
+                                in_file.seekg(0, ios::end);
+                                int size_file = in_file.tellg();
+
+                                if(size_file >= limit_size_file_log)
+                                {
+                                       string file_to_archive = path_file_archive + prepare_file_logger_archive();
+                                       try
+                                       {
+                                              std::filesystem::rename(filename, file_to_archive);
+                                       }
+                                       catch (std::filesystem::filesystem_error& e)
+                                       {
+                                              std::cout << "Error during move file \"" << filename << "\" to \"" << file_to_archive << "\""<< e.what() << std::endl;
+                                       }
+                                }
+                         }
+                         catch(exception & ex)
+                         {
+                                cout << ex.what() << endl;
+                         }
+                     }
+
               public:
                      Logger(){}
                      ~Logger(){}
@@ -110,6 +140,29 @@ namespace Manage
                      {
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
                            cout << prepare_message_logger(level_logger, message_logger);
+                     }
+
+                     void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log)
+                     {
+                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log);
+                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
+                           string msg_file = prepare_message_logger_file(level_logger, message_logger);
+                           fstream filestr;
+                           try
+                           {
+                                 filestr.open (path_logger_file, fstream::in | fstream::out | fstream::app);
+                                 filestr << msg_file;
+                                 filestr.close();
+                           }
+                           catch(exception & ex)
+                           {
+                                 cout << "Error during open in writing log file " << path_logger_file << endl;
+                                 cout << ex.what() << endl;
+                                 if(filestr)
+                                 {
+                                      filestr.close();
+                                 }
+                           }
                      }
        };
 }
