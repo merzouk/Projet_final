@@ -10,6 +10,8 @@
 #include <ctime>
 #include <string>
 
+#include <stdio.h>
+
 using namespace std;
 
 namespace Manage
@@ -103,7 +105,7 @@ namespace Manage
 
 
 
-                     void static check_file_size(std::string filename, std::string path_file_archive, int limit_size_file_log)
+                     void static check_file_size(std::string filename, std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
                          try
                          {
@@ -116,9 +118,11 @@ namespace Manage
                                        string file_to_archive = path_file_archive + prepare_file_logger_archive();
                                        try
                                        {
-                                              std::filesystem::rename(filename, file_to_archive);
+                                             string command = shell_file_mv + "  " + filename + " " +path_file_archive;
+                                             system(command.c_str());
+
                                        }
-                                       catch (std::filesystem::filesystem_error& e)
+                                       catch (exception & e)
                                        {
                                               std::cout << "Error during move file \"" << filename << "\" to \"" << file_to_archive << "\""<< e.what() << std::endl;
                                        }
@@ -140,9 +144,9 @@ namespace Manage
                            cout << prepare_message_logger(level_logger, message_logger);
                      }
 
-                     void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log)
+                     void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
-                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log);
+                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log, string shell_file_mv);
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
                            string msg_file = prepare_message_logger_file(level_logger, message_logger);
                            fstream filestr;
