@@ -9,7 +9,7 @@ TARGET_ARCHIVE=sources/*.cpp header/*.hpp Makefile
 ZIP=tar -cvzf $(ARCHIVE) $(TARGET_ARCHIVE)
 CLEAN_ZIP=rm $(ARCHIVE)
 
-CC = g++ -L /usr/lib/ -L/usr/include  -o $(PROG) sources/*.cpp -std=c++17
+CC = g++ -L /usr/lib/ -L/usr/include  -o $(PROG) sources/*.cpp
 BOOST = -lboost_system -lboost_thread
 SQLITE = -lpthread -lsqlite3
 
