@@ -3,12 +3,14 @@ Projet CPP pour la formation C/CPP embarqué
 
 ## Outils utilisés 
 ```
-- C/C++
-- Boost asio
-- Python
+- C
+- C++ 20
+- Boost Asio 1_80_0
+- Python 3
+- Debian 11
 - Script Shell
 - Sql
-- Sqlite
+- Sqlite 3.34.1
 - Git
 - GitLab
 - Json
@@ -131,7 +133,7 @@ Les tests en ligne de commande sont réalisés sous Debian 11
 
 # Procédure installation de la librairie Boost 1_80_0
 
-```
+```cpp
 wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
 ```
 
