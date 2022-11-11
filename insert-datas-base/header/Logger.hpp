@@ -10,8 +10,6 @@
 #include <ctime>
 #include <string>
 
-#include <filesystem>
-
 using namespace std;
 
 namespace Manage
@@ -140,29 +138,6 @@ namespace Manage
                      {
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
                            cout << prepare_message_logger(level_logger, message_logger);
-                     }
-
-                     void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, long limit_size_file_log)
-                     {
-                           check_file_size(path_logger_file, path_file_archive, limit_size_file_log);
-                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
-                           string msg_file = prepare_message_logger_file(level_logger, message_logger);
-                           fstream filestr;
-                           try
-                           {
-                                 filestr.open (path_logger_file, fstream::in | fstream::out | fstream::app);
-                                 filestr << msg_file;
-                                 filestr.close();
-                           }
-                           catch(exception & ex)
-                           {
-                                 cout << "Error during open in writing log file " << path_logger_file << endl;
-                                 cout << ex.what() << endl;
-                                 if(filestr)
-                                 {
-                                      filestr.close();
-                                 }
-                           }
                      }
        };
 }
