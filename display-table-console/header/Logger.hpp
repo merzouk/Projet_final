@@ -102,34 +102,6 @@ namespace Manage
                      }
 
 
-
-                     void static check_file_size(std::string filename, std::string path_file_archive, long limit_size_file_log)
-                     {
-                         try
-                         {
-                                std::filesystem::path p{filename};
-                                //std::cout << "The size of : " << p.u8string() << " is " << std::filesystem::file_size(p) << " bytes.\n";
-                                long size_file = std::filesystem::file_size(p);
-
-                                if(size_file >= limit_size_file_log)
-                                {
-                                       string file_to_archive = path_file_archive + prepare_file_logger_archive();
-                                       try
-                                       {
-                                              std::filesystem::rename(filename, file_to_archive);
-                                       }
-                                       catch (std::filesystem::filesystem_error& e)
-                                       {
-                                              std::cout << "Error during move file \"" << filename << "\" to \"" << file_to_archive << "\""<< e.what() << std::endl;
-                                       }
-                                }
-                         }
-                         catch(exception & ex)
-                         {
-                                cout << ex.what() << endl;
-                         }
-                     }
-
               public:
                      Logger(){}
                      ~Logger(){}
