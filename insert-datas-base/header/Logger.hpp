@@ -115,7 +115,7 @@ namespace Manage
 
                                 if(size_file >= limit_size_file_log)
                                 {
-                                       string file_to_archive = path_file_archive + prepare_file_logger_archive();
+                                       path_file_archive = path_file_archive + prepare_file_logger_archive();
                                        try
                                        {
                                              string command = shell_file_mv + "  " + filename + " " +path_file_archive;
@@ -124,7 +124,7 @@ namespace Manage
                                        }
                                        catch (exception & e)
                                        {
-                                              std::cout << "Error during move file \"" << filename << "\" to \"" << file_to_archive << "\""<< e.what() << std::endl;
+                                              std::cout << "Error during move file \"" << filename << "\" to \"" << path_file_archive << "\""<< e.what() << std::endl;
                                        }
                                 }
                          }
@@ -148,12 +148,12 @@ namespace Manage
                      {
                            check_file_size(path_logger_file, path_file_archive, limit_size_file_log, shell_file_mv);
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
-                           string msg_file = prepare_message_logger_file(level_logger, message_logger);
+                           message_logger = prepare_message_logger_file(level_logger, message_logger);
                            fstream filestr;
                            try
                            {
                                  filestr.open (path_logger_file, fstream::in | fstream::out | fstream::app);
-                                 filestr << msg_file;
+                                 filestr << message_logger;
                                  filestr.close();
                            }
                            catch(exception & ex)
