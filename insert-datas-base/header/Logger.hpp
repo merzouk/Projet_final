@@ -24,8 +24,9 @@ namespace Manage
                          string s = "";
                          if(!a) return s;
                          int i = 0;
-                         while(*(a + i) != '\0') {
-                             s = s + *(a+i);
+                         while(*(a + i) != '\0')
+                         {
+                             s = s + *(a + i);
                              i++;
                          }
                          return s;
@@ -36,13 +37,13 @@ namespace Manage
                          string s = "";
                          if(!a) return s;
                          int i = 0;
-                         while(*(a + i) != '\0') {
+                         while(*(a + i) != '\0')
+                         {
                              s = s + *(a+i);
                              i++;
                          }
                          return s;
                      }
-
 
                      string static prepare_time_logger()
                      {
@@ -167,13 +168,13 @@ namespace Manage
 
                      void static log(int level_logger, string message_logger, const char * ptr)
                      {
-                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n" + constConvertToString(ptr)+ "\n";
+                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + " " + constConvertToString(ptr)+ "\n";
                            cout << prepare_message_logger(level_logger, message_logger);
                      }
 
                      void static log(int level_logger, string message_logger, char * ptr)
                      {
-                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n"+convertToString(ptr) +"\n";
+                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + " "+convertToString(ptr) +"\n";
                            cout << prepare_message_logger(level_logger, message_logger);
                      }
 
@@ -182,7 +183,6 @@ namespace Manage
                            string msg_logger = " [" + prepare_time_logger() + "] " + convertToString(message_logger) + "\n";
                            cout << prepare_message_logger(level_logger, msg_logger);
                      }
-
 
                      void static log(int level_logger, const char* message_logger)
                      {
@@ -195,7 +195,6 @@ namespace Manage
                            string message_logger = " [" + prepare_time_logger() + "] " + to_string(msg) + "\n";
                            cout << prepare_message_logger(level_logger, message_logger);
                      }
-
 
                      void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
