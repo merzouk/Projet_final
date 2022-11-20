@@ -10,8 +10,6 @@
 #include <ctime>
 #include <string>
 
-#include <stdio.h>
-
 using namespace std;
 
 namespace Manage
@@ -20,6 +18,31 @@ namespace Manage
        {
               private:
                      enum LEVEL { INFO = 1 , ERROR = 2, WARNING = 3, DEBUG = 4 };
+
+                     string static convertToString(char * a)
+                     {
+                         string s = "";
+                         if(!a) return s;
+                         int i = 0;
+                         while(*(a + i) != '\0') {
+                             s = s + *(a+i);
+                             i++;
+                         }
+                         return s;
+                     }
+
+                     string static constConvertToString(const char * a)
+                     {
+                         string s = "";
+                         if(!a) return s;
+                         int i = 0;
+                         while(*(a + i) != '\0') {
+                             s = s + *(a+i);
+                             i++;
+                         }
+                         return s;
+                     }
+
 
                      string static prepare_time_logger()
                      {
@@ -53,7 +76,7 @@ namespace Manage
                         return date_str;
                      }
 
-                     string static prepare_file_logger_archive()
+                     string static prepare_file_logger_archive(int size_file)
                      {
                         // current date/time based on current system
                         time_t now = time(0);
@@ -81,7 +104,7 @@ namespace Manage
                         (ltm->tm_mday < 10) ? (str_day = "0"+to_string(ltm->tm_mday)) : (str_day = to_string(ltm->tm_mday));
 
                         string date_str = str_year +"_"+ str_month + "_" + str_day + "_"
-                                          + str_hour+"_"+str_minute+"_"+str_seconde;
+                                          + str_hour+"_"+str_minute+"_"+str_seconde +"_"+to_string(size_file);
                         return date_str;
                      }
 
@@ -103,8 +126,6 @@ namespace Manage
                         else                              return "[INFO ]"    + msg_logger;
                      }
 
-
-
                      void static check_file_size(std::string filename, std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
                          try
@@ -115,22 +136,22 @@ namespace Manage
 
                                 if(size_file >= limit_size_file_log)
                                 {
-                                       path_file_archive = path_file_archive + prepare_file_logger_archive();
+                                       string file_to_archive = path_file_archive + prepare_file_logger_archive(size_file);
                                        try
                                        {
-                                             string command = shell_file_mv + "  " + filename + " " +path_file_archive;
+                                             string command = shell_file_mv + "  " + filename + " " +file_to_archive;
                                              system(command.c_str());
-
                                        }
                                        catch (exception & e)
                                        {
-                                              std::cout << "Error during move file \"" << filename << "\" to \"" << path_file_archive << "\""<< e.what() << std::endl;
+                                              std::cerr << "Error during move file \"" << filename << "\" to \"" << file_to_archive << "\""<< std::endl;
+                                              std::cerr << "Details : " << e.what() << std::endl;
                                        }
                                 }
                          }
                          catch(exception & ex)
                          {
-                                cout << ex.what() << endl;
+                                cerr << ex.what() << endl;
                          }
                      }
 
@@ -143,6 +164,38 @@ namespace Manage
                            message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n";
                            cout << prepare_message_logger(level_logger, message_logger);
                      }
+
+                     void static log(int level_logger, string message_logger, const char * ptr)
+                     {
+                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n" + constConvertToString(ptr)+ "\n";
+                           cout << prepare_message_logger(level_logger, message_logger);
+                     }
+
+                     void static log(int level_logger, string message_logger, char * ptr)
+                     {
+                           message_logger = " [" + prepare_time_logger() + "] " + message_logger + "\n"+convertToString(ptr) +"\n";
+                           cout << prepare_message_logger(level_logger, message_logger);
+                     }
+
+                     void static log(int level_logger, char* message_logger)
+                     {
+                           string msg_logger = " [" + prepare_time_logger() + "] " + convertToString(message_logger) + "\n";
+                           cout << prepare_message_logger(level_logger, msg_logger);
+                     }
+
+
+                     void static log(int level_logger, const char* message_logger)
+                     {
+                           string msg_logger = " [" + prepare_time_logger() + "] " + constConvertToString(message_logger) + "\n";
+                           cout << prepare_message_logger(level_logger, msg_logger);
+                     }
+
+                     void static log(int level_logger, int msg)
+                     {
+                           string message_logger = " [" + prepare_time_logger() + "] " + to_string(msg) + "\n";
+                           cout << prepare_message_logger(level_logger, message_logger);
+                     }
+
 
                      void static log(int level_logger, string message_logger, string path_logger_file , std::string path_file_archive, int limit_size_file_log, string shell_file_mv)
                      {
@@ -158,8 +211,16 @@ namespace Manage
                            }
                            catch(exception & ex)
                            {
-                                 cout << "Error during open in writing log file " << path_logger_file << endl;
-                                 cout << ex.what() << endl;
+                                 cerr << "Error during open in writing log file : " << path_logger_file << endl;
+                                 cerr << "Details : " << ex.what() << endl;
+                                 if(filestr)
+                                 {
+                                      filestr.close();
+                                 }
+                           }
+                           catch(...)
+                           {
+                                 cerr << "Error during open in writing log file : " << path_logger_file << endl;
                                  if(filestr)
                                  {
                                       filestr.close();
