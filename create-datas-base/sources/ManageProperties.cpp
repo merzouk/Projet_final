@@ -8,7 +8,7 @@ namespace Manage
               int len = int(key.length());
               if (len == 0)
               {
-                     Logger::log(1, "La cle : " + key + " n'est pas valide ");
+                     Logger::log(INFO, "La cle : " + key + " n'est pas valide ");
                      return " ";
               }
               map<string, string>::iterator it = this->map_properties.begin();
@@ -17,7 +17,7 @@ namespace Manage
                      if (key == it->first)
                             return it->second;
               }
-              Logger::log(1, "La cle " + key + " non trouve ");
+              Logger::log(INFO, "La cle " + key + " non trouve ");
               return " ";
        }
 
@@ -26,7 +26,7 @@ namespace Manage
               int len = int(key.length());
               if (len == 0)
               {
-                     Logger::log(1, "La cle : " + key + " n'est pas valide ");
+                     Logger::log(INFO, "La cle : " + key + " n'est pas valide ");
                      return " ";
               }
               map<string, string>::iterator it = this->map_properties.begin();
@@ -46,8 +46,8 @@ namespace Manage
               }
               for (auto itr = this->map_properties.begin(); itr != this->map_properties.end(); ++itr)
               {
-                    Logger::log(1, "key : " + itr->first);
-                    Logger::log(1, "Value : "+ itr->second);
+                    Logger::log(INFO, "key : " + itr->first);
+                    Logger::log(INFO, "Value : "+ itr->second);
               }
        }
 
@@ -67,12 +67,12 @@ namespace Manage
        {
               if (key.length() == 0)
               {
-                     Logger::log(2, "Ajout impossible, la cle n'est n'est pas renseignee : "+ key );
+                     Logger::log(ERROR, "Ajout impossible, la cle n'est n'est pas renseignee : "+ key );
                      return;
               }
               if (value.length() == 0)
               {
-                     Logger::log(2, "Ajout impossible, la valeur n'est n'est pas renseignee : "+value);
+                     Logger::log(ERROR, "Ajout impossible, la valeur n'est n'est pas renseignee : "+value);
                      return;
               }
 
@@ -82,7 +82,7 @@ namespace Manage
               }
               else
               {
-                     Logger::log(2, "Ajout impossible, la cle existe dans map_properties " +key);
+                     Logger::log(ERROR, "Ajout impossible, la cle existe dans map_properties " +key);
               }
        }
 
@@ -125,13 +125,13 @@ namespace Manage
                      }
                      else
                      {
-                            Logger::log(2,  "Erreur pendant la tentative d'ouverture du fichier : " + file_name);
+                            Logger::log(ERROR,  "Erreur pendant la tentative d'ouverture du fichier : " + file_name);
                      }
               }
               catch(exception &ex)
               {
-                   Logger::log(2, "Erreur durant l'ouverture du fichier :  "+file_name);
-                   Logger::log(2, std::string(ex.what()));
+                   Logger::log(ERROR, "Erreur durant l'ouverture du fichier :  "+file_name);
+                   Logger::log(ERROR, std::string(ex.what()));
               }
        }
 }

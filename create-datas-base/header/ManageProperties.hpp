@@ -13,6 +13,7 @@ using namespace std;
 #include <cstring>
 #include <bits/stdc++.h>
 #include <map>
+#include "Logger.hpp"
 
 namespace Manage
 {

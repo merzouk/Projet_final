@@ -24,21 +24,21 @@ int main(int argc, char **argv)
 
         if(argc < 2)
         {
-                Logger::log(2, "Le chemin vers le fichier ressources est obligatoire\n");
+                Logger::log(ERROR, "Le chemin vers le fichier ressources est obligatoire\n");
                 return 1;
         }
 
         string properties_file = argv[1];
         if(properties_file.size() == 0)
 	 {
-                Logger::log(2,  "Le fichier ressources \"" + properties_file + "\" n'est pas renseigne, parametres manquants, connexion impossible" );
+                Logger::log(ERROR,  "Le fichier ressources \"" + properties_file + "\" n'est pas renseigne, parametres manquants, connexion impossible" );
                 return 1;
 	 }
 	 ManageProperties * manageProperties = new ManageProperties();
         manageProperties->read_contains_properties_file(properties_file, ':');
         if(manageProperties->size_map() == 0)
         {
-                Logger::log(2,  "Aucun parametre trouve dans le fichier ressources, creation de la base de donnees impossible");
+                Logger::log(ERROR,  "Aucun parametre trouve dans le fichier ressources, creation de la base de donnees impossible");
                 return 1;
 	 }
 
@@ -50,11 +50,11 @@ int main(int argc, char **argv)
 
         if (rc)
         {
-                Logger::log(2,  "Can't open database");
+                Logger::log(ERROR,  "Can't open database");
         }
         else
         {
-                Logger::log(1,  "Open database successfully");
+                Logger::log(INFO,  "Open database successfully");
         }
 
 	 string sql_query_create_table =  manageProperties->get_value_by_key("request_create_table");
@@ -66,9 +66,9 @@ int main(int argc, char **argv)
         rc = sqlite3_exec(db, pSQL, callback, 0, &errorMsg);
         if (rc != SQLITE_OK)
         {
-                Logger::log(2, "Can't create table inside database");
-                Logger::log(2, "SQL Error :  ");
-                Logger::log(2,  errorMsg  );
+                Logger::log(ERROR, "Can't create table inside database");
+                Logger::log(ERROR, "SQL Error :  ");
+                Logger::log(ERROR,  errorMsg  );
                 sqlite3_free(errorMsg);
                 if (db)
                 {
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
         // close database
         if (db)
         {
-                Logger::log(1,  "Create table successfully");
+                Logger::log(INFO,  "Create table successfully");
                 sqlite3_close(db);
         }
 
