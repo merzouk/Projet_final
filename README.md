@@ -8,6 +8,7 @@ Projet CPP pour la formation C/CPP embarqué
 - Boost Asio 1_80_0
 - Python 3
 - Debian 11
+- Ubuntu 20
 - Script Shell
 - Sql
 - Sqlite 3.34.1
@@ -15,6 +16,7 @@ Projet CPP pour la formation C/CPP embarqué
 - GitLab
 - Json
 - RapidJson
+- Code::Blocks
 ```
 
 ## Introduction
